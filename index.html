@@ -1772,14 +1772,12 @@
   .qr {
     position: absolute; right: 14px; top: 14px;
     width: 56px; height: 56px;
-    background:
-      conic-gradient(from 90deg, var(--ink) 0 25%, white 0 50%, var(--ink) 0 75%, white 0),
-      conic-gradient(from 0deg at 30% 30%, var(--ink), white, var(--ink), white);
-    background-blend-mode: multiply;
-    background-size: 14px 14px, 100% 100%;
+    background: white;
     border: 2px solid var(--ink);
     border-radius: 4px;
+    overflow: hidden;
   }
+  .qr img { width: 100%; height: 100%; display: block; }
   .ticket .lb { font-size: 9px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
   .ticket .nm { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-top: 4px; }
   .ticket .role { font-size: 10px; color: var(--muted); margin-top: 2px; }
@@ -2230,8 +2228,8 @@
       </div>
       <div class="web-body-strip">
         <div class="web-feat"><div class="num">5 Days</div><div class="lbl">Sept 14 → 18</div></div>
-        <div class="web-feat"><div class="num">3 Campuses</div><div class="lbl">UMN · St. Thomas · Mac</div></div>
-        <div class="web-feat"><div class="num">10 Rooms / Day</div><div class="lbl">10 breakout rooms per campus day</div></div>
+        <div class="web-feat"><div class="num">3 Campuses</div><div class="lbl">University of Minnesota · University of St. Thomas · Macalester College</div></div>
+        <div class="web-feat"><div class="num">10 Rooms / Day</div><div class="lbl">Delivering Content to the Community</div></div>
         <div class="web-feat"><div class="num">1,000+</div><div class="lbl">Expected attendees</div></div>
       </div>
     </div>
@@ -2248,13 +2246,36 @@
 <section class="demo-stage">
   <div class="stage-inner">
 
+    <!-- ============= MEET MAYA — attendee persona intro ============= -->
+    <div class="scene" style="margin-bottom:10px;">
+      <div style="background:linear-gradient(135deg,#ffffff 0%, #f7f8fc 100%); border:1px solid var(--line); border-radius:22px; padding:30px 32px; display:flex; gap:28px; align-items:center; flex-wrap:wrap; box-shadow:0 18px 44px rgba(10,16,40,0.07);">
+        <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div style="width:108px; height:108px; border-radius:50%; background:linear-gradient(135deg,var(--midnight),var(--indigo)); border:3px solid var(--gold); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:38px; color:var(--gold);">MO</div>
+          <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--coral);">Our attendee</div>
+        </div>
+        <div style="flex:1; min-width:280px;">
+          <span class="scene-num">Meet Maya</span>
+          <h2 class="scene-title" style="margin-top:6px;">28, ex-Target marketing — now building her own agency.</h2>
+          <p style="font-size:14.5px; line-height:1.62; color:#33405e; margin-top:8px;">
+            Maya Okafor is a 28-year-old Twin Cities entrepreneur. She started out as a marketing specialist at Target, and she's now spinning up her own agency, <b>Aurora Studio</b>. She's at Startup Week to network, see what other founders are building, and sit in on the AI and FinTech sessions — and, most of all, to connect with local VCs about what it really takes to be a successful founder.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;">
+            <span style="font-size:11.5px; font-weight:600; padding:6px 11px; border-radius:999px; background:var(--midnight); color:white;">🤝 Networking</span>
+            <span style="font-size:11.5px; font-weight:600; padding:6px 11px; border-radius:999px; background:var(--midnight); color:white;">🤖 AI sessions</span>
+            <span style="font-size:11.5px; font-weight:600; padding:6px 11px; border-radius:999px; background:var(--midnight); color:white;">💳 FinTech sessions</span>
+            <span style="font-size:11.5px; font-weight:700; padding:6px 11px; border-radius:999px; background:var(--gold); color:var(--midnight);">📈 Meeting local VCs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ============= SCENE 01: Session Catalogue ============= -->
     <div class="scene">
       <div class="scene-head">
         <span class="scene-num">Scene 01</span>
         <div>
-          <h2 class="scene-title">Maya opens Sessions — the full catalogue of everything happening this week.</h2>
-          <p class="scene-sub">Keynotes and morning networking are already on her Agenda. She browses the rest by day and track, taps into any session to read the details, and signs up if there's room.</p>
+          <h2 class="scene-title">Tuesday, 6:00 AM. Coffee's on — Maya opens the session catalogue.</h2>
+          <p class="scene-sub">First full day of sessions, and she's up early: dog out, coffee made, phone in hand. She filled most of her week last week — a few open slots are still waiting. Keynotes and morning networking are already on her Agenda; everything else is hers to pick.</p>
         </div>
       </div>
       <div class="scene-grid">
@@ -2263,7 +2284,7 @@
           <p>
             Sessions shows every available session as a browseable list — filtered by day, tagged by topic track.
             Keynotes and morning networking are pre-loaded on every attendee's Agenda. Everything else is opt-in:
-            Maya taps in, reads the description and speakers, and signs up if seats remain.
+            Maya taps in, reads the description and speakers, and fills her last few open slots if seats remain.
           </p>
           <ul class="bullet-list">
             <li>Keynotes and morning networking auto-added to every Agenda — no action needed</li>
@@ -2413,8 +2434,8 @@
       <div class="scene-head">
         <span class="scene-num">Scene 02</span>
         <div>
-          <h2 class="scene-title">She taps into the FinTech session.</h2>
-          <p class="scene-sub">Speakers, room, sponsor, and a "share to network" button so US Bank's session snowballs through her LinkedIn before lunch.</p>
+          <h2 class="scene-title">She taps into a FinTech session that catches her eye.</h2>
+          <p class="scene-sub">Everything in one place — description, location, speakers, sponsor, and a Share button. She signs up and it drops straight onto her Agenda. Curious who else is going, she posts to LinkedIn: "Anyone else going to the Fintech &amp; Banking Access session today? Let's connect!"</p>
         </div>
       </div>
       <div class="scene-grid reverse">
@@ -2440,7 +2461,7 @@
                     </div>
                     <div class="sd-row">
                       <div class="ico">📍</div>
-                      <div><b>Room 6 · STSS Hall 230</b> · UMN East Bank</div>
+                      <div><b>Room 6 · STSS Hall 230</b> · University of Minnesota East Bank</div>
                     </div>
                     <div class="sd-row">
                       <div class="ico">🎟</div>
@@ -2465,9 +2486,13 @@
                       <div style="font-size:11px; color:var(--muted); font-weight:700;">View →</div>
                     </div>
                   </div>
+                  <div style="margin:0 14px 8px; padding:9px 11px; background:#e8faf2; border:1px solid #b2e8d3; border-radius:10px; display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:13px;">✓</span>
+                    <span style="font-size:10.5px; font-weight:700; color:#15795a; line-height:1.3;">Signed up — added to <b>My Agenda</b> · Tue 10:00 AM</span>
+                  </div>
                   <div class="sd-cta">
-                    <button>Share ↗</button>
-                    <button class="primary">Sign Up for this Session</button>
+                    <button>Share to network ↗</button>
+                    <button class="primary">✓ Signed Up</button>
                   </div>
                 </div>
               </div>
@@ -2476,14 +2501,14 @@
           </div>
         </div>
         <div class="scene-copy">
-          <h3>Speakers can promote without asking the BETA team for help</h3>
+          <h3>Sign up once — it lands on her Agenda and travels through her network</h3>
           <p>
-            Every session has a shareable card with the right branding baked in. Speakers and sponsors
-            invite their own communities — an organic snowball effect — without anyone on staff
-            having to write or design a single email.
+            One tap signs Maya up and the session populates her Agenda automatically. The same screen
+            has a Share button with TCSW branding baked in, so when she posts to LinkedIn the session
+            snowballs through her network — without anyone on staff writing or designing a single email.
           </p>
           <ul class="bullet-list">
-            <li>Hosts edit description, speakers, and image themselves (locked: time, room)</li>
+            <li>Sign-up auto-populates the attendee's personal Agenda — no second step</li>
             <li>Sponsored tracks include the sponsor's logo, link, and a deep-link to their booth</li>
             <li>One-tap share to LinkedIn, Email, or SMS with TCSW co-branding</li>
             <li>Live seat counter prevents the overcrowded-room problem from years past</li>
@@ -2497,16 +2522,18 @@
       <div class="scene-head">
         <span class="scene-num">Scene 03</span>
         <div>
-          <h2 class="scene-title">Her Agenda is built automatically from the sessions she signed up for.</h2>
-          <p class="scene-sub">Every session Maya saved in the Sessions catalogue appears here as her personal timeline. She can see her whole week at a glance — and the app flags a conflict Wednesday at St. Thomas before it surprises her.</p>
+          <h2 class="scene-title">Maya's Agenda is hers — curated and owned by her.</h2>
+          <p class="scene-sub">Outside the main event track, her Agenda is her own curated list of everything that interests her, the whole week in one view. On Wednesday it catches a conflict: a session she tried to add overlaps the AI &amp; Tech workshop she'd already planned. She keeps the workshop — and texts a friend to cover the MedTech demos.</p>
         </div>
       </div>
       <div class="scene-grid">
         <div class="scene-copy">
-          <h3>Calendar ownership without spreadsheet chaos</h3>
+          <h3>A calendar she owns, without spreadsheet chaos</h3>
           <p>
-            Maya can see all 5 days at a glance, set notification preferences per session, and download the whole
-            thing to Apple/Google Calendar. Conflicts are flagged in real time, she can swap a session without losing her place.
+            The Agenda is Maya's — all 5 days at a glance, notification preferences per session, and a one-tap
+            export to Apple/Google Calendar. Conflicts are flagged in real time, so when she tries to add a session
+            that overlaps her AI &amp; Tech workshop, she catches it and decides on the spot — keep the workshop, text
+            a friend to cover the MedTech demos and recap over the next break.
           </p>
           <ul class="bullet-list">
             <li>Conflict detection across overlapping 45-minute breakouts</li>
@@ -2542,7 +2569,7 @@
                       <div class="tl-time"><b>8:00</b>AM</div>
                       <div class="tl-card">
                         <div class="tl-title">Networking Breakfast</div>
-                        <div class="tl-loc">Schulze Hall · St. Thomas</div>
+                        <div class="tl-loc">Schulze Hall · University of St. Thomas</div>
                       </div>
                     </div>
                     <div class="tl-item">
@@ -2556,7 +2583,7 @@
                       <div class="tl-time"><b>10:00</b>AM</div>
                       <div class="tl-card conflict">
                         <div class="tl-title">AI &amp; Tech Workshop: Agent Eval</div>
-                        <div class="tl-loc">Room 4 · St. Thomas TMH</div>
+                        <div class="tl-loc">Room 4 · University of St. Thomas TMH</div>
                         <span class="conflict-flag">⚠ Overlaps with MedTech Demos</span>
                       </div>
                     </div>
@@ -2569,9 +2596,9 @@
                     </div>
                     <div class="tl-item">
                       <div class="tl-time"><b>4:00</b>PM</div>
-                      <div class="tl-card">
-                        <div class="tl-title">Happy Hour · Summit Brewing</div>
-                        <div class="tl-loc">910 Montreal Cir, St. Paul</div>
+                      <div class="tl-card sponsored">
+                        <div class="tl-title">Happy Hour · Surly Brewing Co. — hosted by Bread &amp; Butter Ventures</div>
+                        <div class="tl-loc">520 Malcolm Ave SE · 287 going</div>
                       </div>
                     </div>
                   </div>
@@ -2598,7 +2625,7 @@
         <span class="scene-num">Scene 04</span>
         <div>
           <h2 class="scene-title">Tap a session, drop on the destination.</h2>
-          <p class="scene-sub">Maya taps Tuesday's happy hour. The Map zooms straight to Surly Brewing Co., 520 Malcolm Ave SE, with one pin, walking distance from the UMN East Bank.</p>
+          <p class="scene-sub">Bread &amp; Butter Ventures is hosting Wednesday's happy hour at Surly — a real chance to approach the partners. With 287 going and the venue just under a mile out, Maya taps it; the Map drops one pin on Surly Brewing Co. She leaves at 3:45 to beat the rush.</p>
         </div>
       </div>
       <div class="scene-grid reverse">
@@ -2607,12 +2634,12 @@
             <div class="phone">
               <div class="phone-screen">
                 <div class="notch"></div><div class="home-indicator"></div>
-                <div class="status-bar"><span>4:02</span><div class="status-icons">●●●● 5G ▮</div></div>
+                <div class="status-bar"><span>3:45</span><div class="status-icons">●●●● 5G ▮</div></div>
                 <div class="app-body">
                   <div style="padding: 12px 14px; background: white; border-bottom: 1px solid #f1f2f8; display: flex; align-items: center; justify-content: space-between;">
                     <div>
                       <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px; color:var(--ink);">Map</div>
-                      <div style="font-size:11px; color:var(--muted); margin-top:2px;">Surly Brewing Co. · Tue happy hour</div>
+                      <div style="font-size:11px; color:var(--muted); margin-top:2px;">Surly Brewing Co. · Wed happy hour</div>
                     </div>
                     <div style="display:flex; gap:6px;">
                       <div style="font-size:10px; padding:5px 9px; border-radius:999px; background:#f4f5fa; color:var(--muted); font-weight:600;">All</div>
@@ -2679,9 +2706,9 @@
                       </div>
 
                       <div class="map-card">
-                        <div class="label" style="position:static; background:none; padding:0; font-size:9px; letter-spacing:0.15em; color:var(--coral); text-transform:uppercase; font-weight:700; transform:none;">📍 Featured · Tue Happy Hour</div>
+                        <div class="label" style="position:static; background:none; padding:0; font-size:9px; letter-spacing:0.15em; color:var(--coral); text-transform:uppercase; font-weight:700; transform:none;">📍 Featured · Wed Happy Hour</div>
                         <div class="title">Surly Brewing Co.</div>
-                        <div class="meta">520 Malcolm Ave SE · <b>0.6 mi from UMN</b></div>
+                        <div class="meta">520 Malcolm Ave SE · <b>0.9 mi from University of Minnesota</b></div>
                         <div class="meta">🍻 Hosted by <b>Bread &amp; Butter Ventures</b> · 4–6 PM</div>
                         <div class="ctas">
                           <button>Directions</button>
@@ -2701,7 +2728,7 @@
                 </div>
               </div>
             </div>
-            <div class="phone-caption">Map · Surly Brewing · Tue 4 PM</div>
+            <div class="phone-caption">Map · Surly Brewing · Wed 4 PM</div>
           </div>
         </div>
         <div class="scene-copy">
@@ -2727,19 +2754,19 @@
               <div class="surly-shrub" style="left: 60%; bottom: 8px; width: 18px; height: 12px;"></div>
             </div>
             <div class="surly-meta">
-              <span class="label-pill">Tuesday · 4–6 PM</span>
+              <span class="label-pill">Wednesday · 4–6 PM</span>
               <h4>Surly Brewing Co. · Beer Hall</h4>
-              <div class="addr">520 Malcolm Ave SE, Minneapolis · <b>0.6 mi from UMN East Bank</b></div>
+              <div class="addr">520 Malcolm Ave SE, Minneapolis · <b>0.9 mi from University of Minnesota East Bank</b></div>
               <div class="host">🍻 Hosted by <b>Bread &amp; Butter Ventures</b> · open bar 4–5 PM · 287 going</div>
             </div>
           </div>
-          <h3>Real venues. Real walking distances.</h3>
+          <h3>Real venues. Real distances.</h3>
           <p>
-            Map data comes from open-source OpenStreetMap, styled to match TCSW. Each event in the schedule deep-links straight to the venue. One pin, one destination, no guesswork.
+            The map is powered by Mapbox, styled to match TCSW. Each event in the schedule deep-links straight to the venue — so when Maya taps the Bread &amp; Butter happy hour, she sees Surly is 0.9 miles out and knows to leave at 3:45 to beat the rush. One pin, one destination, no guesswork.
           </p>
           <ul class="bullet-list">
             <li>Tap any session or happy hour to drop a single pin on the destination</li>
-            <li>Walking-time and transit estimates from the attendee's current campus</li>
+            <li>Real driving and walking distances from the attendee's current campus, via Mapbox</li>
             <li>RSVP and Directions actions live on the map card itself</li>
           </ul>
         </div>
@@ -2751,8 +2778,8 @@
       <div class="scene-head">
         <span class="scene-num">Scene 05</span>
         <div>
-          <h2 class="scene-title">The Community tab and Connect: sponsors, ecosystem partners, and fellow founders.</h2>
-          <p class="scene-sub">Community puts every sponsor profile one tap away. Connect is the opt-in attendee directory — only founders who want to be found show up. Both respect privacy without making discovery feel like work.</p>
+          <h2 class="scene-title">Community is what makes Startup Week go round.</h2>
+          <p class="scene-sub">Maya gets to Surly early, grabs a drink, and scrolls the people and partners who make the week happen. She taps into Matchstick Ventures. Connect is the opt-in directory — attendees who want to be found, each listed with their preferred way to connect.</p>
         </div>
       </div>
       <div class="scene-grid" style="grid-template-columns: 1fr;">
@@ -2808,7 +2835,7 @@
                     </div>
                     <div class="sp-card">
                       <div class="sp-logo" style="background:linear-gradient(135deg,#03a98c,#0c1033);">UMN</div>
-                      <div class="sp-name">UMN Ventures</div>
+                      <div class="sp-name">University of Minnesota Ventures</div>
                       <div class="sp-tier">Community</div>
                     </div>
                   </div>
@@ -3025,8 +3052,8 @@
       <div class="scene-head">
         <span class="scene-num">Scene 06</span>
         <div>
-          <h2 class="scene-title">Check-in, badge, and the parts that stay on Eventbrite.</h2>
-          <p class="scene-sub">Ticketing stays on Eventbrite. The app syncs the ticket directly and presents the same QR Eventbrite already issues, so check-in works on day one without supporting Apple Wallet, Google Wallet, or a custom pass system.</p>
+          <h2 class="scene-title">One badge, synced with Eventbrite — always in her pocket.</h2>
+          <p class="scene-sub">Maya's Eventbrite ticket details are saved right to her profile. If she ever needs to leave, she pulls up her QR to be scanned — no fumbling, no paper. The app presents the same QR Eventbrite already issues, so check-in works on day one with no Apple Wallet, Google Wallet, or custom pass system to maintain.</p>
         </div>
       </div>
       <div class="scene-grid reverse">
@@ -3036,6 +3063,18 @@
               <div class="phone-screen">
                 <div class="notch"></div><div class="home-indicator"></div>
                 <div class="status-bar dark"><span>7:48</span><div class="status-icons">●●●● 5G ▮</div></div>
+                <!-- iOS-style top-down in-app notification: U.S. Bank coffee break -->
+                <div style="position:absolute; top:46px; left:10px; right:10px; z-index:50; background:rgba(248,249,252,0.9); -webkit-backdrop-filter:saturate(180%) blur(14px); backdrop-filter:saturate(180%) blur(14px); border:1px solid rgba(255,255,255,0.55); border-radius:18px; box-shadow:0 10px 26px rgba(10,16,40,0.28); padding:10px 12px; display:flex; gap:10px; align-items:flex-start;">
+                  <div style="width:30px; height:30px; border-radius:8px; flex:0 0 30px; background:linear-gradient(135deg,#0c1033,#2c3196); display:flex; align-items:center; justify-content:center; font-size:15px;">☕</div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                      <div style="font-size:9px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);">TCSW 2026</div>
+                      <div style="font-size:9px; color:var(--muted);">now</div>
+                    </div>
+                    <div style="font-size:12px; font-weight:700; color:var(--ink); margin-top:1px;">Coffee break — on U.S. Bank ☕</div>
+                    <div style="font-size:10.5px; color:#3a4a63; line-height:1.3; margin-top:2px;">Fresh coffee &amp; check-in are open now in the Coffman lobby. Presented by U.S. Bank.</div>
+                  </div>
+                </div>
                 <div class="app-banner" style="padding-bottom:14px;">
                   <div class="banner-top">
                     <div class="banner-eyebrow">Your Badge</div>
@@ -3050,14 +3089,14 @@
                 <div class="app-body">
                   <div class="ticket-screen">
                     <div class="ticket">
-                      <div class="qr"></div>
+                      <div class="qr"><img src="assets/maya-qr.png" alt="Maya's check-in QR code"></div>
                       <div class="lb">All-Access · Founder</div>
                       <div class="nm">Maya Okafor</div>
-                      <div class="role">Founder · Aurora Freight</div>
+                      <div class="role">Founder · Aurora Studio</div>
                       <div class="row2">
                         <div>Day<b>Tue 9/15</b></div>
-                        <div>Campus<b>UMN</b></div>
-                        <div>Wristband<b>#A0241</b></div>
+                        <div>Campus<b>University of Minnesota</b></div>
+                        <div>Ticket<b>#A0241</b></div>
                       </div>
                     </div>
                     <div style="background:white; border:1px solid #ebedf5; border-radius:14px; padding:12px;">
@@ -3088,7 +3127,7 @@
         <div class="scene-copy">
           <h3>One badge. Five days. Three campuses.</h3>
           <p>
-            Attendees check in with the QR code Eventbrite already gives them. The app pulls that QR via Eventbrite's API and presents it in-app, so volunteers scan the same code at the door whether the attendee opens Eventbrite or TCSW.
+            Attendees check in with the QR code Eventbrite already gives them. The app pulls that ticket via Eventbrite's API and saves the details straight to the attendee's profile — so if Maya needs to step out, she pulls up the same QR to be scanned, whether she opens Eventbrite or TCSW.
           </p>
           <ul class="bullet-list">
             <li>Eventbrite owns purchase, refunds, and ticket data, no parallel store to maintain</li>
@@ -3105,8 +3144,8 @@
       <div class="scene-head">
         <span class="scene-num">Scene 07</span>
         <div>
-          <h2 class="scene-title">Meanwhile, U.S. Bank's marketing lead opens the sponsor dashboard.</h2>
-          <p class="scene-sub">Edit your sponsor page and see real page-view counts. Every time an attendee loads a sponsored session or your dedicated sponsor page, it counts as one verified view, no guesswork about hallway impressions.</p>
+          <h2 class="scene-title">What Maya doesn't see: every sponsor touchpoint, quantified.</h2>
+          <p class="scene-sub">The parts Maya never notices are exactly what let sponsors prove their investment. Every cornerstone sponsor sees precisely when people like Maya encounter their brand in the feed — no guesswork about hallway impressions. Community sponsors stay front and center, woven in naturally: measurable, and appreciated.</p>
         </div>
       </div>
 
@@ -3245,7 +3284,7 @@
                   <div class="placement-row">
                     <div>
                       <div class="ttl">Sponsored Map Pin (Welcome Booth)</div>
-                      <div class="mt">UMN, St. Thomas, Macalester</div>
+                      <div class="mt">University of Minnesota, University of St. Thomas, Macalester College</div>
                     </div>
                     <div class="num">1,490<small>page views</small></div>
                   </div>
@@ -3305,7 +3344,7 @@
                   <div style="background:#fafbfd; border:1px solid var(--line); border-radius:10px; padding:10px;">
                     <div style="font-size:9px; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">Students &amp; Other</div>
                     <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; color:var(--midnight); margin-top:2px;">109</div>
-                    <div style="font-size:11px; color:var(--muted); margin-top:2px;">11%. UMN, St. Thomas, Mac</div>
+                    <div style="font-size:11px; color:var(--muted); margin-top:2px;">11% · University of Minnesota, University of St. Thomas, Macalester College</div>
                   </div>
                 </div>
                 <div style="margin-top:12px; padding:10px; background:linear-gradient(135deg, var(--midnight), var(--indigo)); color: var(--gold); border-radius:10px; font-size:11px; font-weight:600;">
@@ -3349,9 +3388,65 @@
 
       <div class="scene-copy" style="max-width:760px; margin: 28px auto 0;">
         <p style="text-align:center; color:var(--muted);">
-          The dashboard solves sponsor fulfillment before it becomes a risk. They can see what they paid for,
-          edit their own content, and trust that next year's pitch deck has numbers behind it.
+          This is the layer Maya never sees — and it's what keeps the community sponsors who fund the week front and center.
+          Every cornerstone sponsor can see exactly when attendees encounter their brand, edit their own content, and trust
+          that next year's pitch deck has real numbers behind it. No guesswork. Measurable, and appreciated.
         </p>
+      </div>
+    </div>
+
+    <!-- ============= SCENE 8: BETA.MN + Attentio partnership (closing) ============= -->
+    <div class="scene">
+      <div class="scene-head">
+        <span class="scene-num">Scene 08</span>
+        <div>
+          <h2 class="scene-title">BETA.MN and Attentio — building something that lasts.</h2>
+          <p class="scene-sub">The week Maya just experienced is the product of a partnership. BETA.MN and Attentio set out with one goal: an unforgettable Startup Week that BETA.MN can run on its own, with the data firmly in its own hands.</p>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(140deg, var(--midnight) 0%, #14173f 55%, var(--indigo) 100%); border-radius:24px; padding:44px 40px; color:white; position:relative; overflow:hidden; box-shadow:0 30px 70px rgba(10,16,40,0.35);">
+        <div style="position:absolute; inset:0; background:radial-gradient(600px 240px at 80% -10%, rgba(245,200,66,0.16), transparent 70%); pointer-events:none;"></div>
+
+        <div style="position:relative;">
+          <!-- Partnership lockup -->
+          <div style="display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;">
+            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:26px; letter-spacing:-0.01em;"><span style="color:var(--gold);">β</span> BETA.MN</div>
+            <div style="font-size:20px; color:rgba(255,255,255,0.45);">×</div>
+            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:26px;">Attentio</div>
+          </div>
+
+          <p style="text-align:center; max-width:640px; margin:18px auto 0; font-size:15px; line-height:1.65; color:rgba(255,255,255,0.86);">
+            Together we built more than an app for one event. The platform is designed for long-term self-sufficiency — BETA.MN runs the week itself, and the data never leaves the community that created it.
+          </p>
+
+          <!-- Three data-ownership points -->
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:34px;">
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:18px;">
+              <div style="font-size:20px;">🛠️</div>
+              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--gold); margin-top:10px;">Self-sufficient</div>
+              <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; margin-top:6px;">BETA.MN owns the platform.</div>
+              <div style="font-size:12.5px; line-height:1.5; color:rgba(255,255,255,0.78); margin-top:6px;">Built to be run by the team, year after year — no dependency, no rebuild, no vendor lock-in.</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:18px;">
+              <div style="font-size:20px;">🔒</div>
+              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--gold); margin-top:10px;">Data stays home</div>
+              <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; margin-top:6px;">Never sold, never brokered.</div>
+              <div style="font-size:12.5px; line-height:1.5; color:rgba(255,255,255,0.78); margin-top:6px;">Attendee data lives with BETA.MN — never passed to third parties or data brokers.</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:18px;">
+              <div style="font-size:20px;">🤝</div>
+              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--gold); margin-top:10px;">Trust, not trade</div>
+              <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; margin-top:6px;">Maya opts into BETA.MN — no one else.</div>
+              <div style="font-size:12.5px; line-height:1.5; color:rgba(255,255,255,0.78); margin-top:6px;">Attendees like Maya are comfortable sharing because their data goes to the community they trust, full stop.</div>
+            </div>
+          </div>
+
+          <!-- Closing line -->
+          <div style="text-align:center; margin-top:38px;">
+            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:24px; color:var(--gold); letter-spacing:-0.01em;">This is just the beginning.</div>
+          </div>
+        </div>
       </div>
     </div>
 
