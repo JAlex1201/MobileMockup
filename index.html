@@ -1855,7 +1855,7 @@
   .dir-card.tappable { cursor: pointer; }
   .dir-card.tappable .dir-top { gap: 10px; align-items: center; }
 
-  /* ============ Profile Detail Screen (Scene 07, phone 3) ============ */
+  /* ============ Profile Detail Screen (phone 3) ============ */
   .pd-screen { flex: 1; display: flex; flex-direction: column; overflow-y: auto; background: white; }
   .pd-topbar {
     display: flex; align-items: center; justify-content: space-between;
@@ -2050,9 +2050,61 @@
     font-size: 10px; font-weight: 700; cursor: pointer;
     letter-spacing: 0.02em;
   }
+
+  /* SCROLL PROGRESS BAR (walkthrough stepper) */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    pointer-events: none;
+    opacity: 0; transform: translateY(-8px);
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .scroll-progress.visible { opacity: 1; transform: none; }
+  .scroll-progress .sp-track { height: 4px; width: 100%; background: rgba(10, 24, 56, 0.10); }
+  .scroll-progress .sp-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--midnight), var(--gold));
+    box-shadow: 0 0 10px rgba(245, 200, 66, 0.55);
+    transition: width .12s linear;
+  }
+  .scroll-progress .sp-pill {
+    position: absolute; top: 12px; right: 20px;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(10, 24, 56, 0.92); color: #fff;
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    padding: 7px 13px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.01em;
+    box-shadow: 0 8px 22px rgba(10, 16, 40, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+  }
+  .scroll-progress .sp-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--gold); box-shadow: 0 0 0 3px rgba(245, 200, 66, 0.18);
+  }
+  .scroll-progress .sp-label { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+  .scroll-progress .sp-count {
+    color: var(--gold); font-weight: 700;
+    padding-left: 8px; margin-left: 2px;
+    border-left: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  @media (max-width: 600px) {
+    .scroll-progress .sp-pill { top: 9px; right: 10px; font-size: 10px; padding: 6px 10px; gap: 6px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-progress, .scroll-progress .sp-fill { transition: none; }
+  }
 </style>
 </head>
 <body>
+
+<!-- =================== SCROLL PROGRESS (walkthrough stepper) =================== -->
+<div id="scroll-progress" class="scroll-progress" role="progressbar" aria-label="Walkthrough progress" aria-hidden="true">
+  <div class="sp-track"><div class="sp-fill"></div></div>
+  <div class="sp-pill">
+    <span class="sp-dot"></span>
+    <span class="sp-label">Meet Maya</span>
+    <span class="sp-count">Intro</span>
+  </div>
+</div>
 
 <!-- =================== HERO =================== -->
 <section class="hero">
@@ -2272,7 +2324,7 @@
     <!-- ============= SCENE 01: Session Catalogue ============= -->
     <div class="scene">
       <div class="scene-head">
-        <span class="scene-num">Scene 01</span>
+        <span class="scene-num">Feature · Session Catalogue</span>
         <div>
           <h2 class="scene-title">Tuesday, 6:00 AM. Coffee's on — Maya opens the session catalogue.</h2>
           <p class="scene-sub">First full day of sessions, and she's up early: dog out, coffee made, phone in hand. She filled most of her week last week — a few open slots are still waiting. Keynotes and morning networking are already on her Agenda; everything else is hers to pick.</p>
@@ -2432,7 +2484,7 @@
     <!-- ============= SCENE 2: Session Detail ============= -->
     <div class="scene">
       <div class="scene-head">
-        <span class="scene-num">Scene 02</span>
+        <span class="scene-num">Feature · One-Tap Sign-Up</span>
         <div>
           <h2 class="scene-title">She taps into a FinTech session that catches her eye.</h2>
           <p class="scene-sub">Everything in one place — description, location, speakers, sponsor, and a Share button. She signs up and it drops straight onto her Agenda. Curious who else is going, she posts to LinkedIn: "Anyone else going to the Fintech &amp; Banking Access session today? Let's connect!"</p>
@@ -2520,7 +2572,7 @@
     <!-- ============= SCENE 3: My Schedule + Conflicts ============= -->
     <div class="scene">
       <div class="scene-head">
-        <span class="scene-num">Scene 03</span>
+        <span class="scene-num">Feature · My Agenda</span>
         <div>
           <h2 class="scene-title">Maya's Agenda is hers — curated and owned by her.</h2>
           <p class="scene-sub">Outside the main event track, her Agenda is her own curated list of everything that interests her, the whole week in one view. On Wednesday it catches a conflict: a session she tried to add overlaps the AI &amp; Tech workshop she'd already planned. She keeps the workshop — and texts a friend to cover the MedTech demos.</p>
@@ -2622,7 +2674,7 @@
     <!-- ============= SCENE 6: Event Map (zoomed to Surly Brewing) ============= -->
     <div class="scene">
       <div class="scene-head">
-        <span class="scene-num">Scene 04</span>
+        <span class="scene-num">Feature · Event Map</span>
         <div>
           <h2 class="scene-title">Tap a session, drop on the destination.</h2>
           <p class="scene-sub">Bread &amp; Butter Ventures is hosting Wednesday's happy hour at Surly — a real chance to approach the partners. With 287 going and the venue just under a mile out, Maya taps it; the Map drops one pin on Surly Brewing Co. She leaves at 3:45 to beat the rush.</p>
@@ -2776,7 +2828,7 @@
     <!-- ============= SCENE 5: Community Tab + Connect ============= -->
     <div class="scene">
       <div class="scene-head">
-        <span class="scene-num">Scene 05</span>
+        <span class="scene-num">Feature · Community &amp; Connect</span>
         <div>
           <h2 class="scene-title">Community is what makes Startup Week go round.</h2>
           <p class="scene-sub">Maya gets to Surly early, grabs a drink, and scrolls the people and partners who make the week happen. She taps into Matchstick Ventures. Connect is the opt-in directory — attendees who want to be found, each listed with their preferred way to connect.</p>
@@ -3050,7 +3102,7 @@
     <!-- ============= SCENE 6: Ticket / Badge ============= -->
     <div class="scene">
       <div class="scene-head">
-        <span class="scene-num">Scene 06</span>
+        <span class="scene-num">Feature · Badge &amp; Check-In</span>
         <div>
           <h2 class="scene-title">One badge, synced with Eventbrite — always in her pocket.</h2>
           <p class="scene-sub">Maya's Eventbrite ticket details are saved right to her profile. If she ever needs to leave, she pulls up her QR to be scanned — no fumbling, no paper. The app presents the same QR Eventbrite already issues, so check-in works on day one with no Apple Wallet, Google Wallet, or custom pass system to maintain.</p>
@@ -3142,7 +3194,7 @@
     <!-- ============= SCENE 7: Sponsor Dashboard (web) ============= -->
     <div class="scene">
       <div class="scene-head">
-        <span class="scene-num">Scene 07</span>
+        <span class="scene-num">Feature · Sponsor Dashboard</span>
         <div>
           <h2 class="scene-title">What Maya doesn't see: every sponsor touchpoint, quantified.</h2>
           <p class="scene-sub">The parts Maya never notices are exactly what let sponsors prove their investment. Every cornerstone sponsor sees precisely when people like Maya encounter their brand in the feed — no guesswork about hallway impressions. Community sponsors stay front and center, woven in naturally: measurable, and appreciated.</p>
@@ -3398,7 +3450,7 @@
     <!-- ============= SCENE 8: BETA.MN + Attentio partnership (closing) ============= -->
     <div class="scene">
       <div class="scene-head">
-        <span class="scene-num">Scene 08</span>
+        <span class="scene-num">The Partnership · Built to Last</span>
         <div>
           <h2 class="scene-title">BETA.MN and Attentio — building something that lasts.</h2>
           <p class="scene-sub">The week Maya just experienced is the product of a partnership. BETA.MN and Attentio set out with one goal: an unforgettable Startup Week that BETA.MN can run on its own, with the data firmly in its own hands.</p>
@@ -3597,6 +3649,75 @@
     Built for BETA.MN by <a href="#">Attentio</a> · Concept walkthrough only. Sept 14–18, 2026
   </div>
 </footer>
+
+<script>
+(function () {
+  var bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  var fill = bar.querySelector('.sp-fill');
+  var labelEl = bar.querySelector('.sp-label');
+  var countEl = bar.querySelector('.sp-count');
+  // All walkthrough steps are .scene elements (Meet Maya + 8 feature steps).
+  // Note: the website-preview section also uses the .demo-stage class but holds
+  // no .scene, so we select scenes document-wide rather than by container.
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.scene'));
+  if (!steps.length) return;
+  var featureCount = steps.length - 1; // exclude the "Meet Maya" intro
+
+  function topOf(el) { return el.getBoundingClientRect().top + window.pageYOffset; }
+  function bottomOf(el) { var r = el.getBoundingClientRect(); return r.top + window.pageYOffset + r.height; }
+
+  function update() {
+    var startY = topOf(steps[0]);
+    var endY = bottomOf(steps[steps.length - 1]);
+    var ref = window.pageYOffset + window.innerHeight * 0.45;
+
+    // Fill: progress from the top of the first step to the bottom of the last.
+    var span = Math.max(1, endY - startY);
+    var pct = Math.max(0, Math.min(1, (ref - startY) / span));
+    fill.style.width = (pct * 100).toFixed(2) + '%';
+
+    // Active step = the last step whose top has passed the reference line.
+    var active = 0;
+    for (var i = 0; i < steps.length; i++) {
+      if (topOf(steps[i]) <= ref) active = i;
+    }
+    if (active === 0) {
+      labelEl.textContent = 'Meet Maya';
+      countEl.textContent = 'Intro';
+    } else {
+      var lab = steps[active].querySelector('.scene-num');
+      labelEl.textContent = lab ? lab.textContent.trim() : ('Step ' + active);
+      countEl.textContent = 'Step ' + active + ' / ' + featureCount;
+    }
+
+    // Visible only while the walkthrough is on screen.
+    var show = (window.pageYOffset + window.innerHeight > startY + 80) && (window.pageYOffset < endY - 40);
+    bar.classList.toggle('visible', show);
+    bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+    bar.setAttribute('aria-valuenow', Math.round(pct * 100));
+  }
+
+  var scheduled = false;
+  function onScroll() {
+    if (scheduled) return;
+    scheduled = true;
+    var run = function () { scheduled = false; update(); };
+    // rAF keeps updates paint-aligned and smooth while the tab is visible, but
+    // rAF callbacks are suspended on a hidden page (background tab / headless
+    // preview) which would freeze the bar — so fall back to setTimeout there.
+    if (typeof window.requestAnimationFrame === 'function' && !document.hidden) {
+      window.requestAnimationFrame(run);
+    } else {
+      setTimeout(run, 0);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', update);
+  document.addEventListener('visibilitychange', update);
+  update();
+})();
+</script>
 
 </body>
 </html>
