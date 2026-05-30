@@ -1139,7 +1139,7 @@
   .dash-bar .url b { color: var(--ink); }
   .dash-body { display: grid; grid-template-columns: 200px 1fr; min-height: 560px; }
   .dash-side {
-    background: #0c1033;
+    background: var(--midnight);
     color: white;
     padding: 20px 14px;
   }
