@@ -5,6 +5,10 @@
  * order the sections appear on the page. Jump between sections by searching for
  * the banner comments below, e.g. search:  ==== PHONE ====
  *
+ * Brand: teal (--midnight #0c495a) + gold (--gold #fbbd19), Montserrat + Inter,
+ * emulating tcstartupweek.com. Every colour/font is a CSS variable in :root, so
+ * re-theming the whole app is a one-block change. Full tech spec: ../README.md
+ *
  * TABLE OF CONTENTS
  *   DESIGN TOKENS               — brand colours + shared variables (:root)
  *   BASE / RESET                — reset, document defaults, base typography

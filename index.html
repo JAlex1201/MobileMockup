@@ -19,13 +19,21 @@
   Single-page concept pitch for a Twin Cities Startup Week companion app
   (one web build wrapped with Capacitor for iOS + Android). All styling lives
   in css/styles.css; the only script is js/scroll-progress.js (the walkthrough
-  stepper). The page reads top-to-bottom as a narrative — each major block is
-  delimited by a "==== NAME ====" banner comment:
+  stepper). See README.md for the full tech spec and how to fork this mockup
+  into a real prototype.
+
+  Brand: emulates tcstartupweek.com — teal #0c495a + gold #fbbd19, Montserrat
+  (display) + Inter (body). Every color/font is a CSS variable in :root, so
+  re-theming the whole app is a one-block change.
+
+  The page reads top-to-bottom as a narrative; each major block is delimited by
+  a "==== NAME ====" banner comment:
 
     SCROLL PROGRESS   fixed stepper that tracks the DEMO STAGE walkthrough
-    HERO              headline + positioning ("Five days. Three campuses…")
-    APP PREVIEW       marketing-site mock: two phones + stats strip
-    DEMO STAGE        "Meet Maya" persona, then 8 feature scenes that each pair
+    HERO              headline + positioning ("Five days. Six campuses…")
+    APP PREVIEW       marketing-site mock (tcstartupweek.com) with two phones
+    DEMO STAGE        "Meet Maya" persona, then 8 feature scenes — each a
+                      full-frame panel that scroll-snaps into view, pairing
                       narrative copy with a phone screen:
                         01 Session Catalog   02 Session Detail
                         03 My Schedule       04 Event Map / Street View
@@ -1600,7 +1608,7 @@
         <ul>
           <li>One TCSW web app codebase, deployed to Vercel (or similar)</li>
           <li>Supabase project: sessions, speakers, sponsors, RSVPs, profiles</li>
-          <li>TCSW design system: navy + gold, diagonal stripes, MN-arrow brand</li>
+          <li>TCSW design system: teal + gold, Montserrat type, MN-arrow brand</li>
           <li>Sponsor dashboard with page-view counts (Judd's flag-on-load idea)</li>
         </ul>
       </div>
