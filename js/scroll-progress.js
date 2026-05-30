@@ -100,11 +100,44 @@
       setTimeout(run, 0);
     }
   }
+  // rAF-debounced remeasure: collapses a burst of layout-changing events into
+  // a single getBoundingClientRect pass so we never read layout per frame.
+  var remeasureScheduled = false;
+  function scheduleRemeasure() {
+    if (remeasureScheduled) return;
+    remeasureScheduled = true;
+    var run = function () { remeasureScheduled = false; remeasure(); };
+    if (typeof window.requestAnimationFrame === 'function' && !document.hidden) {
+      window.requestAnimationFrame(run);
+    } else {
+      setTimeout(run, 0);
+    }
+  }
+
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', remeasure);
   window.addEventListener('load', remeasure);
   document.addEventListener('visibilitychange', update);
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(remeasure); }
+
+  // The scenes use CSS `content-visibility: auto`: an off-screen step is laid out
+  // from its estimated `contain-intrinsic-size` and only resolves to its true
+  // height as it nears the viewport. That height change shifts every later step's
+  // document offset, so the cached `tops` must be refreshed when it happens.
+  // A ResizeObserver on the steps is the robust trigger — it fires whenever any
+  // step's box changes size (content-visibility resolving, font/image reflow,
+  // layout shifts), across all evergreen browsers, without reading layout every
+  // scroll frame. rAF-debounced via scheduleRemeasure so a burst coalesces.
+  if (typeof ResizeObserver === 'function') {
+    var ro = new ResizeObserver(scheduleRemeasure);
+    steps.forEach(function (el) { ro.observe(el); });
+  }
+  // Where supported, contentvisibilityautostatechange is the most direct signal;
+  // it's harmless (never fires) in browsers without content-visibility.
+  steps.forEach(function (el) {
+    el.addEventListener('contentvisibilityautostatechange', scheduleRemeasure);
+  });
+
   measure();
   update();
 })();

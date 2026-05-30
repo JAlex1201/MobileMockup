@@ -27,24 +27,37 @@
  * ============================================================================ */
 
   /* ============================ DESIGN TOKENS ============================ */
+  /* Palette scraped from tcstartupweek.com (the live TCSW site we emulate):
+     --teal #0c495a, --yellow #fbbd19, --yellow-dark #e0a510, text #1a1a1a,
+     text-muted #5a6a72, light bg #f5f7f8. Token NAMES are kept stable so the
+     whole app re-skins from this one block; values now carry the TCSW identity. */
   :root {
-    --midnight: #0a1838;          /* TCSW deep navy */
-    --indigo: #142554;            /* lifted navy */
-    --gold: #f5c842;              /* TCSW signature gold */
-    --gold-deep: #d9a916;
-    --gold-soft: #fde9a6;
-    --aurora: #4ad7c0;             /* secondary, used sparingly */
+    --midnight: #0c495a;          /* TCSW signature deep-petrol teal (was navy) */
+    --indigo: #0e5a70;            /* lifted teal — for subtle dark gradients */
+    --teal-soft: #e6eef1;         /* pale teal for light fills */
+    --gold: #fbbd19;              /* TCSW signature gold/yellow */
+    --gold-deep: #e0a510;         /* darker gold — hover/depth */
+    --gold-soft: #fdd97a;         /* soft warm gold */
+    --aurora: #4ad7c0;             /* secondary teal-green, used sparingly */
     --aurora-deep: #2ba893;
-    --coral: #ff6b6b;              /* secondary accent */
-    --plum: #6b3aa0;               /* hints in banner gradient */
-    --ink: #0a1838;
-    --paper: #f6f6fb;
-    --line: #e6e7ef;
-    --muted: #6b6f86;
+    --coral: #ff6b6b;              /* secondary accent (category tags) */
+    --plum: #6b3aa0;               /* hint in banner gradient, used sparingly */
+    --ink: #1a1a1a;               /* primary body text (TCSW --text) */
+    --paper: #f5f7f8;             /* light section background (TCSW) */
+    --line: #dbe4e8;              /* teal-tinted hairline border */
+    --muted: #5a6a72;             /* muted gray-teal text (TCSW --text-muted) */
   }
 
   /* ============================ BASE / RESET ============================ */
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Presentation flow: each walkthrough step (.scene) is a full-frame panel that
+     gently snaps into view, so the audience sees that step's header, copy, and
+     phone together. `proximity` (not mandatory) leaves the hero + website-preview
+     sections free-scrolling. scroll-padding-top clears the fixed progress bar. */
+  html {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 14px;
+  }
   html, body {
     background: #eef0f7;
     color: var(--ink);
@@ -56,34 +69,25 @@
   /* ============================ HERO ============================ */
   .hero {
     background:
-      radial-gradient(900px 500px at 90% 100%, rgba(245,200,66,0.18), transparent 55%),
-      radial-gradient(700px 500px at 10% 0%, rgba(107,58,160,0.22), transparent 60%),
-      linear-gradient(180deg, #0a1838 0%, #142554 60%, #0a1838 100%);
+      radial-gradient(900px 520px at 88% 0%, rgba(251,189,25,0.14), transparent 55%),
+      radial-gradient(760px 520px at 6% 100%, rgba(251,189,25,0.08), transparent 60%),
+      linear-gradient(180deg, #0c495a 0%, #0e5365 58%, #0c495a 100%);
     color: white;
     padding: 56px 24px 80px;
     position: relative;
     overflow: hidden;
   }
-  /* diagonal accent stripes matching TCSW banner art */
+  /* Faint wireframe rectangles — the live tcstartupweek.com background motif.
+     Replaces the old colored diagonal stripes; pairs with the grid in ::before. */
   .hero::after {
     content: "";
-    position: absolute;
-    top: 0; left: 0; bottom: 0; width: 18%;
+    position: absolute; inset: 0;
     background:
-      linear-gradient(115deg, transparent 0 28%, rgba(245,200,66,0.35) 28% 29%, transparent 29% 42%, rgba(74,215,192,0.28) 42% 43%, transparent 43% 56%, rgba(107,58,160,0.45) 56% 57%, transparent 57%);
-    opacity: 0.7;
-    pointer-events: none;
-    z-index: 0;
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='620'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.09' stroke-width='1'%3E%3Crect x='560' y='-40' width='300' height='230' rx='12' transform='rotate(20 710 75)'/%3E%3Crect x='470' y='205' width='190' height='150' rx='12' transform='rotate(-12 565 280)'/%3E%3Crect x='655' y='320' width='250' height='190' rx='12' transform='rotate(26 780 415)'/%3E%3Crect x='110' y='380' width='205' height='150' rx='12' transform='rotate(-18 212 455)'/%3E%3C/g%3E%3C/svg%3E") right -40px top -20px / 880px auto no-repeat;
+    pointer-events: none; z-index: 0;
   }
-  .hero .right-stripes {
-    position: absolute;
-    top: 0; right: 0; bottom: 0; width: 18%;
-    background:
-      linear-gradient(245deg, transparent 0 28%, rgba(245,200,66,0.35) 28% 29%, transparent 29% 42%, rgba(74,215,192,0.28) 42% 43%, transparent 43% 56%, rgba(107,58,160,0.45) 56% 57%, transparent 57%);
-    opacity: 0.7;
-    pointer-events: none;
-    z-index: 0;
-  }
+  /* legacy decorative element — superseded by the wireframe motif above */
+  .hero .right-stripes { display: none; }
   .hero::before {
     content: "";
     position: absolute; inset: 0;
@@ -102,14 +106,14 @@
   }
   .brand-mark {
     display: flex; align-items: center; gap: 12px;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
   }
   .brand-mark-icon {
     width: 32px; height: 32px;
     display: inline-flex; align-items: center; justify-content: center;
     color: var(--gold);
-    filter: drop-shadow(0 0 12px rgba(245,200,66,0.4));
+    filter: drop-shadow(0 0 12px rgba(251,189,25,0.4));
   }
   .brand-mark-icon svg { width: 100%; height: 100%; }
   .nav-pill {
@@ -122,7 +126,7 @@
     font-weight: 600;
   }
   .hero-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(40px, 6vw, 76px);
     font-weight: 700;
     line-height: 0.98;
@@ -162,14 +166,24 @@
     padding: 64px 24px 96px;
   }
   .stage-inner { max-width: 1240px; margin: 0 auto; }
+  /* Each step is a full-frame panel: min-height fills the viewport and the step's
+     content (header + copy + phone) is vertically centered so it's all visible at
+     once. The solid top rule + step badge act as the section divider between steps. */
   .scene {
-    padding: 80px 0;
-    border-top: 1px dashed #d4d6e2;
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 30px 0;
+    border-top: 1px solid var(--line);
+    scroll-snap-align: start;
+    /* Off-screen steps skip render (perf); intrinsic size ~= one viewport so snap
+       points + scroll-progress offsets stay close before a step first paints. */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
   }
-  .scene:first-child { border-top: 0; padding-top: 24px; }
-  .scene-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 40px; flex-wrap: wrap; }
+  .scene:first-child { border-top: 0; }
+  .scene-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
   .scene-num {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -181,23 +195,23 @@
     border-left: 3px solid var(--gold);
   }
   .scene-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(28px, 3.4vw, 42px);
-    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(24px, 2.6vw, 34px);
+    font-weight: 800;
     color: var(--midnight);
     letter-spacing: -0.02em;
-    line-height: 1.05;
+    line-height: 1.04;
   }
   .scene-sub {
     color: var(--muted);
-    font-size: 16px;
+    font-size: 15px;
     max-width: 680px;
-    margin-top: 10px;
+    margin-top: 8px;
   }
   .scene-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 56px;
+    gap: 44px;
     align-items: center;
   }
   .scene-grid.reverse { grid-template-columns: 1fr 1fr; }
@@ -205,25 +219,25 @@
     .scene-grid, .scene-grid.reverse { grid-template-columns: 1fr; gap: 40px; }
   }
   .scene-copy h3 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 22px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
     font-weight: 700;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     color: var(--ink);
   }
   .scene-copy p {
     color: #3a3d52;
-    font-size: 16px;
-    margin-bottom: 18px;
+    font-size: 14px;
+    margin-bottom: 12px;
   }
-  .bullet-list { list-style: none; display: grid; gap: 12px; margin-top: 22px; }
+  .bullet-list { list-style: none; display: grid; gap: 8px; margin-top: 14px; }
   .bullet-list li {
-    display: flex; gap: 12px;
-    padding: 12px 14px;
+    display: flex; gap: 10px;
+    padding: 9px 12px;
     background: white;
     border: 1px solid var(--line);
-    border-radius: 12px;
-    font-size: 14px;
+    border-radius: 10px;
+    font-size: 13px;
     color: #2c2f44;
   }
   .bullet-list li::before {
@@ -233,10 +247,16 @@
     border-radius: 6px;
     background:
       url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f5c842'><path d='M9 16.2 5.5 12.7l-1.4 1.4L9 19 20 8l-1.4-1.4z'/></svg>") center / 16px 16px no-repeat,
-      #0a1838;
+      #0c495a;
     margin-top: 1px;
   }
   .phone-wrap { display: flex; justify-content: center; align-items: center; perspective: 1200px; }
+  /* Scale walkthrough-scene phones (frame + content together, via zoom) so each
+     step's header + copy + phone all fit inside a single viewport for the live demo. */
+  .scene .phone-wrap { zoom: 0.78; }
+  /* Multi-phone showcase scenes line up 2–3 phones, so scale them down further to
+     keep the whole step (copy + phones) inside one frame. */
+  .scene .phone-wrap.dual { zoom: 0.54; }
   .phone-wrap.dual { gap: 28px; }
 
   /* ============================ PHONE ============================ */
@@ -269,7 +289,7 @@
   }
   .home-indicator {
     position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
-    width: 96px; height: 4px; background: rgba(10,24,56,0.55);
+    width: 96px; height: 4px; background: rgba(12,73,90,0.55);
     border-radius: 99px; z-index: 30;
   }
   /* Android variant */
@@ -288,7 +308,7 @@
   }
   .nav-pill-android {
     position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
-    width: 110px; height: 4px; background: rgba(10,24,56,0.6);
+    width: 110px; height: 4px; background: rgba(12,73,90,0.6);
     border-radius: 99px; z-index: 30;
   }
   /* OS badge above each phone */
@@ -312,59 +332,38 @@
   .status-icons { display: flex; gap: 4px; align-items: center; }
   .status-icons svg { width: 14px; height: 14px; }
 
-  /* App Banner, custom designed for TCSW (navy + gold) */
+  /* App Banner — matches the current TCSW site: flat petrol-teal + soft gold glow.
+     (The old gold/teal/purple diagonal stripe motif from the previous design is gone.) */
   .app-banner {
     padding: 14px 16px 18px;
     color: white;
     position: relative;
     overflow: hidden;
     background:
-      radial-gradient(120% 90% at 0% 100%, rgba(107,58,160,0.45), transparent 60%),
-      radial-gradient(140% 80% at 100% 0%, rgba(74,215,192,0.18), transparent 60%),
-      linear-gradient(135deg, #0a1838 0%, #142554 55%, #0a1838 100%);
+      radial-gradient(130% 90% at 100% 0%, rgba(251,189,25,0.14), transparent 55%),
+      linear-gradient(135deg, #0c495a 0%, #0e5365 55%, #0c495a 100%);
   }
-  /* TCSW diagonal stripe motif, left side */
+  /* Faint blueprint grid — the same backdrop motif as the website hero (replaces
+     the diagonal stripes). Masked so it fades, keeping the banner clean. */
   .app-banner::before {
     content: "";
-    position: absolute; top: 0; bottom: 0; left: 0; width: 32px;
-    background:
-      linear-gradient(115deg,
-        transparent 0 18%,
-        rgba(245,200,66,0.65) 18% 20%,
-        transparent 20% 38%,
-        rgba(74,215,192,0.55) 38% 40%,
-        transparent 40% 58%,
-        rgba(107,58,160,0.7) 58% 60%,
-        transparent 60% 78%,
-        rgba(245,200,66,0.35) 78% 79%,
-        transparent 79%);
-    pointer-events: none;
-  }
-  /* mirror on right */
-  .app-banner::after {
-    content: "";
-    position: absolute; top: 0; bottom: 0; right: 0; width: 32px;
-    background:
-      linear-gradient(245deg,
-        transparent 0 18%,
-        rgba(245,200,66,0.65) 18% 20%,
-        transparent 20% 38%,
-        rgba(74,215,192,0.55) 38% 40%,
-        transparent 40% 58%,
-        rgba(107,58,160,0.7) 58% 60%,
-        transparent 60% 78%,
-        rgba(245,200,66,0.35) 78% 79%,
-        transparent 79%);
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(130% 110% at 100% 0%, #000 35%, transparent 82%);
+    mask-image: radial-gradient(130% 110% at 100% 0%, #000 35%, transparent 82%);
     pointer-events: none;
   }
   .banner-top { display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2;}
   .banner-eyebrow {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 9px; letter-spacing: 0.22em; font-weight: 700;
-    color: rgba(245,200,66,0.85); text-transform: uppercase;
+    color: rgba(251,189,25,0.85); text-transform: uppercase;
   }
   .banner-year {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 11px; font-weight: 700;
     color: var(--gold);
     letter-spacing: 0.18em;
@@ -375,7 +374,7 @@
     position: relative; z-index: 2;
   }
   .banner-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 30px;
     letter-spacing: -0.01em;
@@ -399,7 +398,7 @@
     background: var(--gold);
     border-radius: 99px;
     margin-top: 8px;
-    box-shadow: 0 0 8px rgba(245,200,66,0.5);
+    box-shadow: 0 0 8px rgba(251,189,25,0.5);
   }
   .banner-sub {
     margin-top: 8px;
@@ -416,8 +415,8 @@
     margin-top: 10px;
     display: inline-flex; align-items: center; gap: 8px;
     padding: 5px 10px; border-radius: 999px;
-    background: rgba(245,200,66,0.12);
-    border: 1px solid rgba(245,200,66,0.4);
+    background: rgba(251,189,25,0.12);
+    border: 1px solid rgba(251,189,25,0.4);
     font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
     color: var(--gold-soft);
     position: relative; z-index: 2;
@@ -491,14 +490,14 @@
     padding: 14px;
     margin-bottom: 10px;
     position: relative;
-    box-shadow: 0 2px 6px -3px rgba(10,24,56,0.06);
+    box-shadow: 0 2px 6px -3px rgba(12,73,90,0.06);
   }
   .session-card.sponsored {
-    border-color: rgba(245,200,66,0.6);
+    border-color: rgba(251,189,25,0.6);
     background: linear-gradient(180deg, #fff7d6 0%, white 100%);
   }
   .session-card.featured {
-    border-color: rgba(10,24,56,0.4);
+    border-color: rgba(12,73,90,0.4);
     background: linear-gradient(180deg, #f0f3fb 0%, white 100%);
   }
   .session-card.featured::before {
@@ -557,7 +556,7 @@
     transition: transform 0.3s, color 0.3s; /* explicit props, not `all` */
   }
   .tab-item.active {
-    background: rgba(245,200,66,0.16);
+    background: rgba(251,189,25,0.16);
     color: var(--midnight);
   }
   .tab-item.active .ic {
@@ -574,7 +573,7 @@
     display: flex; align-items: center; gap: 4px;
   }
   .powered .attn {
-    color: rgba(245,200,66,0.7);
+    color: rgba(251,189,25,0.7);
     font-weight: 600;
   }
 
@@ -582,8 +581,8 @@
   .sd-hero {
     height: 130px;
     background:
-      radial-gradient(120% 80% at 80% 30%, rgba(245,200,66,0.45), transparent 60%),
-      linear-gradient(135deg, #0a1838 0%, #142554 60%, #6b3aa0 100%);
+      radial-gradient(120% 80% at 80% 30%, rgba(251,189,25,0.45), transparent 60%),
+      linear-gradient(135deg, #0c495a 0%, #0e5a70 60%, #6b3aa0 100%);
     position: relative;
   }
   .sd-hero::after {
@@ -609,7 +608,7 @@
   }
   .sd-content { padding: 14px; flex: 1; overflow-y: auto; }
   .sd-tag-row { display: flex; gap: 6px; margin-bottom: 8px; }
-  .sd-title { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.15; color: var(--ink); }
+  .sd-title { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 700; line-height: 1.15; color: var(--ink); }
   .sd-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 11px; color: #3a3d52; }
   .sd-row .ico { width: 24px; height: 24px; background: #eef0f7; border-radius: 8px;
     display: flex; align-items: center; justify-content: center; flex: 0 0 24px; }
@@ -671,23 +670,18 @@
   /* MY SCHEDULE */
   .ms-summary {
     background:
-      radial-gradient(120% 80% at 100% 0%, rgba(245,200,66,0.18), transparent 60%),
-      linear-gradient(135deg, #0a1838 0%, #142554 100%);
+      radial-gradient(120% 80% at 100% 0%, rgba(251,189,25,0.18), transparent 60%),
+      linear-gradient(135deg, #0c495a 0%, #0e5a70 100%);
     color: white;
     padding: 14px 16px;
     position: relative; overflow: hidden;
   }
-  .ms-summary::after {
-    content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 18px;
-    background: linear-gradient(245deg,
-      transparent 0 30%, rgba(245,200,66,0.4) 30% 32%,
-      transparent 32% 55%, rgba(74,215,192,0.35) 55% 57%,
-      transparent 57%);
-  }
+  /* streak removed — clean teal card matches the current design */
+  .ms-summary::after { display: none; }
   .ms-summary .lbl { font-size: 9px; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; font-weight: 700; }
-  .ms-summary .big { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin-top: 4px; }
+  .ms-summary .big { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 700; margin-top: 4px; }
   .ms-stats { display: flex; gap: 10px; margin-top: 10px; }
-  .ms-stat { background: rgba(255,255,255,0.08); padding: 8px 10px; border-radius: 10px; flex: 1; border: 1px solid rgba(245,200,66,0.18);}
+  .ms-stat { background: rgba(255,255,255,0.08); padding: 8px 10px; border-radius: 10px; flex: 1; border: 1px solid rgba(251,189,25,0.18);}
   .ms-stat .n { font-size: 16px; font-weight: 800; color: var(--gold); }
   .ms-stat .l { font-size: 8px; letter-spacing: 0.1em; color: rgba(255,255,255,0.7); text-transform: uppercase; font-weight: 700; }
 
@@ -768,8 +762,8 @@
     position: absolute;
     width: 70px; height: 70px;
     border-radius: 50%;
-    border: 2px dashed rgba(10,24,56,0.5);
-    background: rgba(245,200,66,0.12);
+    border: 2px dashed rgba(12,73,90,0.5);
+    background: rgba(251,189,25,0.12);
     transform: translate(-50%, -50%);
     display: flex; align-items: center; justify-content: center;
     font-size: 8px; font-weight: 800;
@@ -786,7 +780,7 @@
     background: white;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 6px 18px rgba(10,24,56,0.22);
+    box-shadow: 0 6px 18px rgba(12,73,90,0.22);
     z-index: 5;
   }
   .zoom-btn {
@@ -906,7 +900,7 @@
     background: white;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 24px 50px -28px rgba(10,24,56,0.35), 0 12px 30px -18px rgba(10,24,56,0.18);
+    box-shadow: 0 24px 50px -28px rgba(12,73,90,0.35), 0 12px 30px -18px rgba(12,73,90,0.18);
     border: 1px solid var(--line);
     margin-bottom: 18px;
   }
@@ -975,7 +969,7 @@
   .surly-text {
     position: absolute;
     left: 14px; top: 28px;
-    font-family: 'Space Grotesk', 'Impact', sans-serif;
+    font-family: 'Montserrat', 'Impact', sans-serif;
     font-weight: 900;
     color: #f0f2f5;
     font-size: 30px;
@@ -988,7 +982,7 @@
     position: absolute;
     left: 14px; top: 10px;
     color: rgba(255,255,255,0.65);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 0.08em;
@@ -1041,7 +1035,7 @@
     background: var(--gold); color: var(--midnight);
   }
   .surly-meta h4 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 20px; font-weight: 700;
     margin-top: 8px;
     color: var(--ink);
@@ -1079,20 +1073,14 @@
   .sponsor-hero {
     padding: 14px 16px 20px;
     background:
-      radial-gradient(140% 90% at 100% 0%, rgba(245,200,66,0.4), transparent 60%),
-      linear-gradient(135deg, #0a1838, #142554);
+      radial-gradient(140% 90% at 100% 0%, rgba(251,189,25,0.4), transparent 60%),
+      linear-gradient(135deg, #0c495a, #0e5a70);
     color: white;
     position: relative; overflow: hidden;
   }
-  .sponsor-hero::after {
-    content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 18px;
-    background: linear-gradient(115deg,
-      transparent 0 30%, rgba(245,200,66,0.6) 30% 32%,
-      transparent 32% 55%, rgba(74,215,192,0.4) 55% 57%,
-      transparent 57%);
-  }
+  .sponsor-hero::after { display: none; }
   .sponsor-hero .lbl { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 700;}
-  .sponsor-hero h2 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; margin-top: 6px; line-height: 1.05; }
+  .sponsor-hero h2 { font-family: 'Montserrat', sans-serif; font-size: 22px; margin-top: 6px; line-height: 1.05; }
   .tier-row { display: flex; gap: 8px; padding: 10px; overflow-x: auto; background: white; border-bottom: 1px solid #eef0f7;}
   .tier-pill {
     flex: 0 0 auto; padding: 6px 12px; border-radius: 999px;
@@ -1136,7 +1124,7 @@
   .dash-bar .url {
     margin-left: 14px; flex: 1; padding: 6px 12px; border-radius: 8px;
     background: white; font-size: 11px; color: var(--muted); border: 1px solid #e6e7ef;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
   .dash-bar .url b { color: var(--ink); }
   .dash-body { display: grid; grid-template-columns: 200px 1fr; min-height: 560px; }
@@ -1147,7 +1135,7 @@
   }
   .dash-side .brand {
     display: flex; align-items: center; gap: 8px;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700; font-size: 13px; margin-bottom: 22px;
   }
   .dash-side .brand .mark {
@@ -1164,13 +1152,13 @@
     font-size: 12px; color: rgba(255,255,255,0.75);
     margin-bottom: 2px;
   }
-  .side-link.active { background: rgba(245,200,66,0.12); color: var(--gold-soft); border-left: 2px solid var(--gold); padding-left: 8px; }
+  .side-link.active { background: rgba(251,189,25,0.12); color: var(--gold-soft); border-left: 2px solid var(--gold); padding-left: 8px; }
   .side-link .d { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); }
   .side-link.active .d { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
   .dash-main { padding: 24px 28px; background: #fafbfd; }
   .dash-hd { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
   .dash-hd h1 {
-    font-family: 'Space Grotesk', sans-serif; font-size: 22px; color: var(--ink);
+    font-family: 'Montserrat', sans-serif; font-size: 22px; color: var(--ink);
     letter-spacing: -0.01em;
   }
   .dash-hd .sub { color: var(--muted); font-size: 13px; margin-top: 3px; }
@@ -1186,7 +1174,7 @@
     border-radius: 14px; padding: 14px;
   }
   .kpi .l { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; }
-  .kpi .v { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; color: var(--ink); margin-top: 4px; }
+  .kpi .v { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 700; color: var(--ink); margin-top: 4px; }
   .kpi .delta { font-size: 11px; font-weight: 700; margin-top: 4px; display: inline-flex; align-items: center; gap: 4px; }
   .delta.up { color: #0a8f5c; }
   .delta.down { color: #b91c2c; }
@@ -1196,7 +1184,7 @@
     background: white; border: 1px solid var(--line); border-radius: 14px; padding: 16px;
   }
   .panel h3 {
-    font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: var(--ink);
+    font-family: 'Montserrat', sans-serif; font-size: 13px; color: var(--ink);
     letter-spacing: 0.04em; margin-bottom: 10px;
   }
   .chart {
@@ -1213,7 +1201,7 @@
   }
   .placement-row .ttl { font-size: 12px; font-weight: 700; color: var(--ink); }
   .placement-row .mt { font-size: 10px; color: var(--muted); margin-top: 2px; }
-  .placement-row .num { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 16px; color: var(--ink); text-align: right; }
+  .placement-row .num { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; color: var(--ink); text-align: right; }
   .placement-row .num small { font-weight: 500; font-size: 10px; color: var(--muted); display: block; }
 
   .editor-row { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 8px; }
@@ -1222,7 +1210,7 @@
   }
   .field .lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; }
   .field .val { font-size: 12px; color: var(--ink); margin-top: 2px; font-weight: 500; }
-  .field.editing { border-color: var(--gold-deep); background: white; box-shadow: 0 0 0 3px rgba(245,200,66,0.22); }
+  .field.editing { border-color: var(--gold-deep); background: white; box-shadow: 0 0 0 3px rgba(251,189,25,0.22); }
   .field.editing .val::after {
     content: ""; display: inline-block; width: 1px; height: 12px; background: var(--gold-deep);
     vertical-align: middle; margin-left: 2px;
@@ -1234,115 +1222,124 @@
   .website-frame {
     background: white;
     border-radius: 18px;
-    box-shadow: 0 30px 60px -25px rgba(10,24,56,0.35), 0 18px 38px -18px rgba(10,24,56,0.22);
+    box-shadow: 0 30px 60px -25px rgba(12,73,90,0.35), 0 18px 38px -18px rgba(12,73,90,0.22);
     overflow: hidden; border: 1px solid #e6e7ef;
   }
   .web-hero {
-    padding: 40px 36px 44px;
+    padding: 40px 36px 38px;
     position: relative; overflow: hidden;
+    color: #fff;
+    display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; align-items: center;
+    /* Faithful tcstartupweek.com hero backdrop: flat petrol-teal wash, a faint
+       blueprint grid, and scattered thin wireframe rectangles (the site's signature
+       motif), plus a soft gold glow top-right. Replaces the old gold edge streaks. */
     background:
-      radial-gradient(70% 90% at 100% 0%, rgba(245,200,66,0.18), transparent 60%),
-      radial-gradient(60% 80% at 0% 100%, rgba(107,58,160,0.25), transparent 60%),
-      linear-gradient(135deg, #0a1838 0%, #142554 100%);
-    color: white;
-    display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: center;
-  }
-  .web-hero::before, .web-hero::after {
-    content: ""; position: absolute; pointer-events: none; z-index: 0;
-  }
-  /* Left edge stripe — identical motif/stops to the in-app .app-banner::before (115deg) */
-  .web-hero::before {
-    top: 0; bottom: 0; left: 0; width: 34px;
-    background: linear-gradient(115deg,
-      transparent 0 18%, rgba(245,200,66,0.65) 18% 20%,
-      transparent 20% 38%, rgba(74,215,192,0.55) 38% 40%,
-      transparent 40% 58%, rgba(107,58,160,0.7) 58% 60%,
-      transparent 60% 78%, rgba(245,200,66,0.35) 78% 79%,
-      transparent 79%);
-  }
-  /* Right edge stripe — mirror of ::before so both angle INWARD (245deg = mirror of 115deg),
-     exactly like .app-banner::after. Same stops, just the mirrored angle. */
-  .web-hero::after {
-    top: 0; bottom: 0; right: 0; width: 34px;
-    background: linear-gradient(245deg,
-      transparent 0 18%, rgba(245,200,66,0.65) 18% 20%,
-      transparent 20% 38%, rgba(74,215,192,0.55) 38% 40%,
-      transparent 40% 58%, rgba(107,58,160,0.7) 58% 60%,
-      transparent 60% 78%, rgba(245,200,66,0.35) 78% 79%,
-      transparent 79%);
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='620' height='520'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.10' stroke-width='1'%3E%3Crect x='378' y='-28' width='232' height='180' rx='10' transform='rotate(20 494 62)'/%3E%3Crect x='300' y='150' width='150' height='118' rx='10' transform='rotate(-12 375 209)'/%3E%3Crect x='452' y='250' width='208' height='158' rx='10' transform='rotate(26 556 329)'/%3E%3C/g%3E%3C/svg%3E") right -28px top -18px / 600px auto no-repeat,
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px) 0 0 / 48px 48px,
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px) 0 0 / 48px 48px,
+      radial-gradient(70% 110% at 90% -10%, rgba(251,189,25,0.12), transparent 55%),
+      linear-gradient(160deg, #0c495a 0%, #0e5365 55%, #0c495a 100%);
   }
   .web-hero-copy { position: relative; z-index: 2; }
+  /* Headline: "Minnesota's Largest" in white, the rest in gold — title case,
+     heavy Montserrat, tight leading. Mirrors the live tcstartupweek.com hero. */
   .web-hero-copy h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 34px; font-weight: 800; line-height: 1; color: var(--gold);
-    text-transform: uppercase; letter-spacing: -0.005em;
-    margin-bottom: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(28px, 3vw, 40px); font-weight: 800; line-height: 1.04;
+    color: #fff; letter-spacing: -0.015em; margin: 14px 0 0;
   }
-  .web-hero-copy h1 .small {
-    display: block; font-size: 22px; color: var(--gold);
-  }
-  .web-hero-copy .eyebrow {
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(245,200,66,0.7); font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .web-hero-copy .pitch {
-    color: rgba(255,255,255,0.78); font-size: 14px; margin-top: 12px; max-width: 380px;
-  }
-  .web-hero-copy .download-row {
-    display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap;
-  }
-  .store-badge {
+  .web-hero-copy h1 .accent { color: var(--gold); }
+  /* Gold date pill with calendar glyph */
+  .date-pill {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 9px 14px; border-radius: 12px;
-    background: black; color: white;
-    text-decoration: none; font-family: 'Inter', sans-serif;
+    background: var(--gold); color: #10303a;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.10em; text-transform: uppercase;
+    padding: 8px 14px; border-radius: 999px;
   }
-  .store-badge .ic { width: 22px; height: 22px; flex: 0 0 22px; }
-  .store-badge .ic svg { width: 100%; height: 100%; fill: currentColor; }
-  .store-badge .txt { display: flex; flex-direction: column; line-height: 1; }
-  .store-badge .txt small { font-size: 8px; color: rgba(255,255,255,0.75); }
-  .store-badge .txt b { font-size: 13px; font-weight: 600; margin-top: 2px; }
+  .date-pill svg { width: 14px; height: 14px; flex: 0 0 14px; }
+  .web-hero-copy .pitch {
+    color: rgba(255,255,255,0.82); font-size: 16px; font-weight: 500;
+    margin-top: 16px; max-width: 420px;
+  }
+  /* The two real site CTAs: gold-filled + white-outlined, uppercase + spaced. */
+  .hero-btns { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+  .hero-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif; font-weight: 700;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 12px 20px; border-radius: 7px; text-decoration: none;
+    transition: transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .hero-btn.primary {
+    background: var(--gold); color: #10303a;
+    box-shadow: 0 8px 20px -8px rgba(251,189,25,0.7);
+  }
+  .hero-btn.primary:hover { background: var(--gold-deep); transform: translateY(-1px); }
+  .hero-btn.ghost {
+    background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.55);
+  }
+  .hero-btn.ghost:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
+  /* Small flag tying the embedded phones back to the site */
+  .app-flag {
+    display: inline-flex; align-items: center; gap: 7px;
+    margin-top: 20px; font-size: 11.5px; font-weight: 600;
+    color: rgba(255,255,255,0.62); letter-spacing: 0.02em;
+  }
+  .app-flag .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--aurora);
+    box-shadow: 0 0 0 3px rgba(74,215,192,0.2);
+  }
   .web-nav {
-    background: var(--midnight); padding: 14px 36px;
+    background: var(--midnight); padding: 16px 36px;
     display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
+  /* Logo lockup: gold angular mark + stacked "TWIN CITIES / STARTUP WEEK". */
   .web-nav-left {
-    display: flex; align-items: center; gap: 10px;
-    color: white; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13px;
-    text-transform: uppercase; letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+    color: var(--gold);
   }
-  .web-nav-left .mn-mark { width: 26px; height: 28px; }
+  /* Real TCSW logo lockup recolored to brand gold via an alpha mask — same shape
+     as the white asset, just filled gold to match the live site, on the teal nav. */
+  .web-logo {
+    display: block;
+    width: 100px; height: 34px;
+    background-color: var(--gold);
+    -webkit-mask: url(../assets/tcsw-logo.png) left center / contain no-repeat;
+    mask: url(../assets/tcsw-logo.png) left center / contain no-repeat;
+  }
   .web-nav-right {
-    display: flex; align-items: center; gap: 4px;
-    font-family: 'Inter', sans-serif;
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Montserrat', sans-serif;
   }
   .web-nav-right a {
-    color: rgba(255,255,255,0.78); text-decoration: none;
-    font-size: 12px; font-weight: 600;
-    padding: 7px 14px; border-radius: 999px;
-    letter-spacing: 0.02em;
-    transition: color 0.2s, background 0.2s;
+    position: relative;
+    color: rgba(255,255,255,0.82); text-decoration: none;
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    padding: 8px 4px; letter-spacing: 0.08em;
+    transition: color 0.2s;
   }
-  .web-nav-right a:hover { color: white; background: rgba(255,255,255,0.06); }
+  .web-nav-right a:hover { color: #fff; }
+  /* Active link gets the gold underline from the live nav. */
+  .web-nav-right a.active { color: #fff; }
+  .web-nav-right a.active::after {
+    content: ""; position: absolute; left: 4px; right: 4px; bottom: 0;
+    height: 2px; background: var(--gold); border-radius: 2px;
+  }
+  /* GET INVOLVED is an outlined button, not a text link. */
   .web-nav-right .cta {
-    color: var(--gold);
-    border: 1px solid rgba(245,200,66,0.55);
-    margin-left: 6px;
+    color: #fff; border: 1.5px solid rgba(255,255,255,0.6);
+    border-radius: 7px; padding: 9px 16px; margin-left: 10px;
   }
-  .web-nav-right .cta:hover {
-    background: rgba(245,200,66,0.12);
-    color: var(--gold);
-  }
+  .web-nav-right .cta::after { display: none; }
+  .web-nav-right .cta:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
   .web-phone-cluster {
-    display: flex; align-items: flex-end; justify-content: center; gap: 18px;
-    transform: translateY(24px);
+    display: flex; align-items: center; justify-content: center; gap: 16px;
     position: relative; z-index: 2;
   }
-  .web-phone-cluster .phone { width: 215px; padding: 8px; border-radius: 36px; }
+  .web-phone-cluster .phone { width: 198px; padding: 8px; border-radius: 36px; }
   .web-phone-cluster .phone .phone-screen { border-radius: 28px; }
-  .web-phone-cluster .phone.android { width: 200px; padding: 7px; border-radius: 32px; }
+  .web-phone-cluster .phone.android { width: 184px; padding: 7px; border-radius: 32px; }
   .web-phone-cluster .phone.android .phone-screen { border-radius: 24px; }
   .web-phone-cluster .phone .notch { top: 5px; width: 70px; height: 16px; border-radius: 12px; }
   .web-phone-cluster .phone .home-indicator { bottom: 4px; width: 60px; height: 3px; }
@@ -1393,16 +1390,16 @@
   .web-phone-cluster .tab-item .ic { width: 13px; height: 13px; }
   .web-phone-cluster .tab-item .ic svg { width: 9px; height: 9px; }
   .web-body-strip {
-    padding: 24px 36px;
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-    background: white;
+    padding: 26px 36px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    background: #fff; border-top: 2px solid var(--gold);
   }
   .web-feat {
     display: flex; flex-direction: column; gap: 4px;
     align-items: center; text-align: center;
   }
   .web-feat .num {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; color: var(--midnight);
+    font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 22px; color: var(--midnight);
   }
   .web-feat .lbl {
     font-size: 11px; color: var(--muted); font-weight: 600;
@@ -1427,24 +1424,24 @@
     border-radius: 16px;
     background: var(--midnight);
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 12px -2px rgba(10,24,56,0.3);
+    box-shadow: 0 4px 12px -2px rgba(12,73,90,0.3);
     position: relative; overflow: hidden;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     color: var(--gold);
     font-size: 18px;
     letter-spacing: -0.02em;
   }
+  /* subtle gold sheen instead of the old diagonal stripes */
   .app-icon::before {
     content: ""; position: absolute; inset: 0;
-    background:
-      linear-gradient(115deg, transparent 0 30%, rgba(245,200,66,0.4) 30% 32%, transparent 32% 55%, rgba(74,215,192,0.25) 55% 57%, transparent 57% 78%, rgba(107,58,160,0.35) 78% 79%, transparent 79%);
+    background: radial-gradient(120% 120% at 28% 18%, rgba(255,255,255,0.18), transparent 60%);
   }
   .app-icon span { position: relative; z-index: 1; }
   .app-icon.android { border-radius: 50%; }
   .store-app-info { flex: 1; min-width: 0; }
   .store-app-info .ttl {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); line-height: 1.15;
+    font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); line-height: 1.15;
   }
   .store-app-info .dev { font-size: 10px; color: var(--muted); margin-top: 2px;}
   .store-app-info .meta {
@@ -1465,14 +1462,14 @@
   .store-shot {
     flex: 0 0 110px; height: 200px;
     border-radius: 14px;
-    background: linear-gradient(160deg, #0a1838 0%, #142554 100%);
+    background: linear-gradient(160deg, #0c495a 0%, #0e5a70 100%);
     position: relative; overflow: hidden;
-    border: 1px solid rgba(245,200,66,0.18);
+    border: 1px solid rgba(251,189,25,0.18);
     display: flex; flex-direction: column;
   }
   .store-shot .mini-banner {
     padding: 8px 8px 6px; color: var(--gold);
-    font-family: 'Space Grotesk', sans-serif; font-weight: 800;
+    font-family: 'Montserrat', sans-serif; font-weight: 800;
     font-size: 9.5px; line-height: 1; letter-spacing: -0.01em;
     text-transform: uppercase; text-align: center;
   }
@@ -1483,7 +1480,7 @@
     display: flex; flex-direction: column; gap: 4px;
   }
   .mini-pill { height: 6px; border-radius: 2px; background: #eef0f7; }
-  .mini-pill.gold { background: rgba(245,200,66,0.6); }
+  .mini-pill.gold { background: rgba(251,189,25,0.6); }
   .mini-pill.dark { background: var(--midnight); }
   .mini-pill.w70 { width: 70%; } .mini-pill.w50 { width: 50%; } .mini-pill.w90 { width: 90%; }
   .store-foot {
@@ -1499,7 +1496,7 @@
     border-right: 1px solid #f1f2f8;
   }
   .store-stat:last-child { border-right: 0; }
-  .store-stat .v { font-family: 'Space Grotesk',sans-serif; font-size: 13px; font-weight: 700; color: var(--ink); }
+  .store-stat .v { font-family: 'Montserrat',sans-serif; font-size: 13px; font-weight: 700; color: var(--ink); }
   .store-stat .l { font-size: 8.5px; color: var(--muted); font-weight: 600; letter-spacing: 0.06em; margin-top: 2px; }
 
   /* Onboarding screen */
@@ -1510,23 +1507,16 @@
   .onb-hero {
     padding: 40px 24px 24px;
     background:
-      radial-gradient(120% 80% at 100% 0%, rgba(245,200,66,0.22), transparent 60%),
-      linear-gradient(160deg, #0a1838 0%, #142554 100%);
+      radial-gradient(120% 80% at 100% 0%, rgba(251,189,25,0.22), transparent 60%),
+      linear-gradient(160deg, #0c495a 0%, #0e5a70 100%);
     color: white; text-align: center;
     position: relative; overflow: hidden;
   }
-  .onb-hero::before, .onb-hero::after {
-    content: ""; position: absolute; top: 0; bottom: 0; width: 14px;
-    background: linear-gradient(115deg,
-      transparent 0 30%, rgba(245,200,66,0.55) 30% 32%,
-      transparent 32% 60%, rgba(107,58,160,0.45) 60% 62%, transparent 62%);
-  }
-  .onb-hero::before { left: 0; }
-  .onb-hero::after { right: 0; transform: scaleX(-1); }
+  .onb-hero::before, .onb-hero::after { display: none; }
   .onb-mark { display: inline-block; }
   .onb-mark .mn-mark { width: 64px; height: 70px; margin-bottom: 12px; }
   .onb-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 22px; font-weight: 800; line-height: 0.9;
     color: var(--gold); text-transform: uppercase;
   }
@@ -1573,6 +1563,11 @@
     background: linear-gradient(180deg, #ffffff 0%, #f4f5fa 100%);
     padding: 80px 24px 96px;
     border-top: 1px solid #e6e7ef;
+    /* Large diagram-heavy section below the walkthrough — skip its render
+       work until the user scrolls near it. It sits after the last measured
+       scene, so deferring it never shifts the scroll-progress offsets. */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 900px;
   }
   .arch-inner { max-width: 1240px; margin: 0 auto; }
   .arch-head { text-align: center; margin-bottom: 48px; }
@@ -1580,7 +1575,7 @@
     display: inline-block; margin-bottom: 14px;
   }
   .arch-head h2 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(28px, 3.4vw, 42px);
     font-weight: 700; color: var(--midnight);
     letter-spacing: -0.02em; line-height: 1.05;
@@ -1596,17 +1591,17 @@
     border-radius: 20px;
     padding: 36px 28px;
     border: 1px solid var(--line);
-    box-shadow: 0 24px 50px -28px rgba(10,24,56,0.20), 0 14px 30px -20px rgba(10,24,56,0.10);
+    box-shadow: 0 24px 50px -28px rgba(12,73,90,0.20), 0 14px 30px -20px rgba(12,73,90,0.10);
     margin-bottom: 28px;
   }
   .flow-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
     font-weight: 700; color: var(--gold-deep);
     margin-bottom: 6px; text-align: center;
   }
   .flow-sub {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 22px; font-weight: 700; color: var(--midnight);
     text-align: center; margin-bottom: 36px;
     letter-spacing: -0.01em;
@@ -1649,7 +1644,7 @@
     color: var(--muted); text-transform: uppercase;
   }
   .flow-box .name {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px; font-weight: 700; color: var(--midnight);
     line-height: 1.15;
   }
@@ -1675,7 +1670,7 @@
     margin-bottom: 4px;
   }
   .stack-card .logo {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 18px; font-weight: 800;
     color: var(--midnight);
     line-height: 1; margin-bottom: 8px;
@@ -1710,15 +1705,7 @@
     position: relative; overflow: hidden;
     margin-bottom: 28px;
   }
-  .journey::before, .journey::after {
-    content: ""; position: absolute; top: 0; bottom: 0; width: 16px;
-    background: linear-gradient(115deg,
-      transparent 0 25%, rgba(245,200,66,0.5) 25% 27%,
-      transparent 27% 50%, rgba(74,215,192,0.35) 50% 52%,
-      transparent 52% 75%, rgba(107,58,160,0.45) 75% 77%, transparent 77%);
-  }
-  .journey::before { left: 0; }
-  .journey::after { right: 0; transform: scaleX(-1); }
+  .journey::before, .journey::after { display: none; }
   .journey-title { color: var(--gold); text-align: center; }
   .journey-sub { color: white !important; }
   .journey-row {
@@ -1728,7 +1715,7 @@
   }
   .step-card {
     background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(245,200,66,0.22);
+    border: 1px solid rgba(251,189,25,0.22);
     border-radius: 14px;
     padding: 18px 16px;
     position: relative;
@@ -1738,7 +1725,7 @@
     width: 26px; height: 26px;
     border-radius: 50%;
     background: var(--gold); color: var(--midnight);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 800; font-size: 13px;
     display: flex; align-items: center; justify-content: center;
   }
@@ -1746,7 +1733,7 @@
     font-size: 22px; margin-bottom: 8px;
   }
   .step-card .step-h {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 13px; font-weight: 700;
     color: var(--gold-soft); line-height: 1.2;
   }
@@ -1759,8 +1746,8 @@
     font-size: 8.5px; font-weight: 700; letter-spacing: 0.12em;
     text-transform: uppercase;
     padding: 3px 7px; border-radius: 4px;
-    background: rgba(245,200,66,0.15); color: var(--gold-soft);
-    border: 1px solid rgba(245,200,66,0.3);
+    background: rgba(251,189,25,0.15); color: var(--gold-soft);
+    border: 1px solid rgba(251,189,25,0.3);
   }
 
   /* Two-column note for tech audience */
@@ -1772,7 +1759,7 @@
     border-radius: 14px; padding: 22px 22px;
   }
   .arch-note h4 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px; color: var(--midnight); font-weight: 700;
     margin-bottom: 8px; letter-spacing: 0.02em;
     display: flex; align-items: center; gap: 8px;
@@ -1801,7 +1788,7 @@
 
   /* footer */
   footer {
-    background: #0a1838;
+    background: #0c495a;
     color: rgba(255,255,255,0.7);
     padding: 40px 24px;
     text-align: center;
@@ -1831,7 +1818,7 @@
   }
   .qr img { width: 100%; height: 100%; display: block; }
   .ticket .lb { font-size: 9px; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
-  .ticket .nm { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-top: 4px; }
+  .ticket .nm { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-top: 4px; }
   .ticket .role { font-size: 10px; color: var(--muted); margin-top: 2px; }
   .ticket .row2 { display: flex; gap: 14px; margin-top: 10px; }
   .ticket .row2 div { font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
@@ -1925,38 +1912,33 @@
     color: var(--muted); text-transform: uppercase;
   }
   .pd-hero {
-    padding: 22px 18px 18px;
+    /* Don't let the flex column crush this hero (it has overflow:hidden, which
+       would give it min-height:0 and clip the avatar) — keep its natural height. */
+    flex-shrink: 0;
+    padding: 14px 16px;
     background:
-      radial-gradient(120% 80% at 0% 100%, rgba(245,200,66,0.16), transparent 60%),
-      linear-gradient(150deg, #0a1838 0%, #142554 100%);
+      radial-gradient(120% 80% at 0% 100%, rgba(251,189,25,0.16), transparent 60%),
+      linear-gradient(150deg, #0c495a 0%, #0e5a70 100%);
     color: white;
     position: relative;
     text-align: center;
     overflow: hidden;
   }
-  .pd-hero::before, .pd-hero::after {
-    content: "";
-    position: absolute; top: 0; bottom: 0; width: 16px;
-    background: linear-gradient(115deg,
-      transparent 0 30%, rgba(245,200,66,0.5) 30% 32%,
-      transparent 32% 60%, rgba(74,215,192,0.35) 60% 62%, transparent 62%);
-  }
-  .pd-hero::before { left: 0; }
-  .pd-hero::after { right: 0; transform: scaleX(-1); }
+  .pd-hero::before, .pd-hero::after { display: none; }
   .pd-avatar {
-    width: 76px; height: 76px; border-radius: 50%;
+    width: 60px; height: 60px; border-radius: 50%;
     background: var(--midnight);
     border: 3px solid var(--gold);
     color: var(--gold);
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800; font-size: 26px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800; font-size: 22px;
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 12px;
+    margin: 0 auto 8px;
     box-shadow: 0 8px 18px rgba(0,0,0,0.25);
     position: relative; z-index: 1;
   }
   .pd-name {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700; font-size: 18px; line-height: 1.1;
     color: white;
     position: relative; z-index: 1;
@@ -1986,12 +1968,12 @@
     font-size: 8.5px; font-weight: 700; letter-spacing: 0.06em;
     text-transform: uppercase;
     padding: 4px 8px; border-radius: 999px;
-    background: rgba(245,200,66,0.18);
+    background: rgba(251,189,25,0.18);
     color: var(--gold-soft);
-    border: 1px solid rgba(245,200,66,0.32);
+    border: 1px solid rgba(251,189,25,0.32);
   }
   .pd-section {
-    padding: 14px 16px;
+    padding: 9px 16px;
     border-bottom: 1px solid #f1f2f8;
   }
   .pd-section .hd {
@@ -2078,7 +2060,7 @@
   .phone-caption {
     margin-top: 18px; text-align: center;
     font-size: 12px; color: var(--muted);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     font-weight: 600;
@@ -2109,9 +2091,13 @@
     pointer-events: none;
     opacity: 0; transform: translateY(-8px);
     transition: opacity .35s ease, transform .35s ease;
+    /* Pin the fixed bar to its own compositor layer. A fixed element that
+       overlaps scrolling content is otherwise repainted every scroll frame;
+       promoting it lets the compositor hold it still without repainting. */
+    will-change: transform;
   }
   .scroll-progress.visible { opacity: 1; transform: none; }
-  .scroll-progress .sp-track { height: 4px; width: 100%; background: rgba(10, 24, 56, 0.10); }
+  .scroll-progress .sp-track { height: 4px; width: 100%; background: rgba(12, 73, 90, 0.10); }
   .scroll-progress .sp-fill {
     /* Progress is shown by horizontally scaling a full-width bar with
        transform: scaleX() rather than animating `width`. Animating width
@@ -2122,7 +2108,7 @@
     transform: scaleX(0); transform-origin: left center;
     will-change: transform;
     background: linear-gradient(90deg, var(--midnight), var(--gold));
-    box-shadow: 0 0 10px rgba(245, 200, 66, 0.55);
+    box-shadow: 0 0 10px rgba(251, 189, 25, 0.55);
     transition: transform .12s linear;
   }
   .scroll-progress .sp-pill {
@@ -2136,9 +2122,9 @@
   }
   .scroll-progress .sp-dot {
     width: 7px; height: 7px; border-radius: 50%;
-    background: var(--gold); box-shadow: 0 0 0 3px rgba(245, 200, 66, 0.18);
+    background: var(--gold); box-shadow: 0 0 0 3px rgba(251, 189, 25, 0.18);
   }
-  .scroll-progress .sp-label { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+  .scroll-progress .sp-label { font-family: 'Montserrat', sans-serif; font-weight: 700; }
   .scroll-progress .sp-count {
     color: var(--gold); font-weight: 700;
     padding-left: 8px; margin-left: 2px;

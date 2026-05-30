@@ -4,7 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>TCSW 2026 · Mobile Event App. Powered by Attentio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- TCSW brand fonts: Montserrat (display/headings) + Inter (body/UI) — matches tcstartupweek.com -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -53,7 +56,7 @@
       <div class="nav-pill">Powered by <span style="color:var(--gold); margin-left:4px;">Attentio</span></div>
     </div>
     <h1 class="hero-title">
-      Five days. Three campuses. <em>One pocket-sized HQ</em> for the Twin Cities startup community.
+      Five days. Six campuses. <em>One pocket-sized HQ</em> for the Twin Cities startup community.
     </h1>
     <p class="hero-sub">
       A mobile companion concept for Twin Cities Startup Week. September 14–18, 2026.
@@ -73,30 +76,41 @@
   <div class="stage-inner" style="max-width: 1000px;">
     <div style="text-align:center; margin-bottom: 32px;">
       <p style="font-size:12px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;">The full picture</p>
-      <h2 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(24px,3.5vw,36px); font-weight:800; color:var(--midnight); line-height:1.15; margin:0;">
+      <h2 style="font-family:'Montserrat',sans-serif; font-size:clamp(24px,3.5vw,36px); font-weight:800; color:var(--midnight); line-height:1.15; margin:0;">
         From the TCSW website to every phone at the event.
       </h2>
     </div>
 
     <div class="website-frame">
+      <!-- Faithful recreation of the tcstartupweek.com top nav: logo lockup,
+           ABOUT / THE WEEK (active) / GET INVOLVED (outlined button). -->
       <div class="web-nav">
-        <div class="web-nav-left">TCSW 2026</div>
-        <div class="web-nav-right">
-          <a>Schedule</a>
-          <a>Speakers</a>
-          <a>Sponsors</a>
-          <a>About</a>
-          <a class="cta">Get Tickets</a>
-        </div>
+        <a class="web-nav-left" href="#">
+          <!-- Real TCSW logo lockup, used as-is but filled brand gold via CSS mask -->
+          <span class="web-logo" role="img" aria-label="Twin Cities Startup Week"></span>
+        </a>
+        <nav class="web-nav-right">
+          <a href="#">About</a>
+          <a href="#" class="active">The Week</a>
+          <a href="#" class="cta">Get Involved</a>
+        </nav>
       </div>
+      <!-- Hero copy mirrors the live site: gold date pill, the white+gold
+           "Minnesota's Largest Convergence…" headline, the "Five days. Six
+           campuses." line, and the two real CTAs. Our app rides on the right. -->
       <div class="web-hero">
         <div class="web-hero-copy">
-          <div class="eyebrow">Sept 14–18, 2026</div>
-          <h1>Twin Cities<br><span class="small">Startup Week</span></h1>
-          <div class="pitch">
-            Five days. Three campuses. One thousand entrepreneurs across Minneapolis &amp; St. Paul.
-            Build your schedule, find your people, and never miss a session.
+          <div class="date-pill">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm12 7v10H5V9h14z"/></svg>
+            September 14–18, 2026 · Twin Cities, MN
           </div>
+          <h1>Minnesota's Largest <span class="accent">Convergence Of Innovation, Investors &amp; Founders</span></h1>
+          <div class="pitch">Five days. Six campuses. One ecosystem.</div>
+          <div class="hero-btns">
+            <a href="#" class="hero-btn primary">Become a Sponsor</a>
+            <a href="#" class="hero-btn ghost">Shape the Program</a>
+          </div>
+          <div class="app-flag"><span class="dot"></span> New · official event app, shown here →</div>
         </div>
         <div class="web-phone-cluster">
 
@@ -252,8 +266,7 @@
       </div>
       <div class="web-body-strip">
         <div class="web-feat"><div class="num">5 Days</div><div class="lbl">Sept 14 → 18</div></div>
-        <div class="web-feat"><div class="num">3 Campuses</div><div class="lbl">University of Minnesota · University of St. Thomas · Macalester College</div></div>
-        <div class="web-feat"><div class="num">10 Rooms / Day</div><div class="lbl">Delivering Content to the Community</div></div>
+        <div class="web-feat"><div class="num">6 Campuses</div><div class="lbl">U of M · St. Thomas · Macalester &amp; more</div></div>
         <div class="web-feat"><div class="num">1,000+</div><div class="lbl">Expected attendees</div></div>
       </div>
     </div>
@@ -274,7 +287,7 @@
     <div class="scene" style="margin-bottom:10px;">
       <div style="background:linear-gradient(135deg,#ffffff 0%, #f7f8fc 100%); border:1px solid var(--line); border-radius:22px; padding:30px 32px; display:flex; gap:28px; align-items:center; flex-wrap:wrap; box-shadow:0 18px 44px rgba(10,16,40,0.07);">
         <div style="flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:10px;">
-          <div style="width:108px; height:108px; border-radius:50%; background:linear-gradient(135deg,var(--midnight),var(--indigo)); border:3px solid var(--gold); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:38px; color:var(--gold);">MO</div>
+          <div style="width:108px; height:108px; border-radius:50%; background:linear-gradient(135deg,var(--midnight),var(--indigo)); border:3px solid var(--gold); display:flex; align-items:center; justify-content:center; font-family:'Montserrat',sans-serif; font-weight:700; font-size:38px; color:var(--gold);">MO</div>
           <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--coral);">Our attendee</div>
         </div>
         <div style="flex:1; min-width:280px;">
@@ -332,8 +345,6 @@
                     <div class="banner-title">TWIN CITIES<span class="accent">STARTUP WEEK</span></div>
                   </div>
                   <div class="banner-sub"><span class="pulse"></span> Sept 14–18 · Minneapolis – St. Paul</div>
-                  <div class="banner-beta"><span class="beta-mark">β</span> Produced by BETA.MN</div>
-                  <div class="powered">Powered by <span class="attn">Attentio</span></div>
                 </div>
                 <div class="app-body">
                   <div class="tabs">
@@ -552,7 +563,7 @@
       </div>
       <div class="scene-grid">
         <div class="scene-copy">
-          <h3>A calendar she owns, without spreadsheet chaos</h3>
+          <h3>A calendar she owns</h3>
           <p>
             The Agenda is Maya's: all 5 days at a glance, notification preferences per session, and a one-tap
             export to Apple/Google Calendar. Conflicts are flagged in real time, so when she tries to add a session
@@ -577,7 +588,7 @@
                     <div class="big">14 sessions saved</div>
                     <div class="ms-stats">
                       <div class="ms-stat"><div class="n">5</div><div class="l">Days</div></div>
-                      <div class="ms-stat"><div class="n">3</div><div class="l">Campuses</div></div>
+                      <div class="ms-stat"><div class="n">6</div><div class="l">Campuses</div></div>
                       <div class="ms-stat"><div class="n">1</div><div class="l">Conflict</div></div>
                     </div>
                   </div>
@@ -662,7 +673,7 @@
                 <div class="app-body">
                   <div style="padding: 12px 14px; background: white; border-bottom: 1px solid #f1f2f8; display: flex; align-items: center; justify-content: space-between;">
                     <div>
-                      <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px; color:var(--ink);">Map</div>
+                      <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:16px; color:var(--ink);">Map</div>
                       <div style="font-size:11px; color:var(--muted); margin-top:2px;">Surly Brewing Co. · Wed happy hour</div>
                     </div>
                     <div style="display:flex; gap:6px;">
@@ -894,8 +905,8 @@
                       <div class="title">Community Partner</div>
                       <div class="share">↗</div>
                     </div>
-                    <div class="pd-hero" style="background:radial-gradient(circle at 30% 50%, rgba(107,58,160,0.9) 0%, #0a1838 100%);">
-                      <div class="pd-avatar" style="background:linear-gradient(135deg,#b8a4ff,#4a2c9a); font-size:18px; font-family:'Space Grotesk',sans-serif; font-weight:700; border-color:rgba(184,164,255,0.5);">M8</div>
+                    <div class="pd-hero">
+                      <div class="pd-avatar" style="background:linear-gradient(135deg,#b8a4ff,#4a2c9a); font-size:18px; font-family:'Montserrat',sans-serif; font-weight:700; border-color:rgba(184,164,255,0.5);">M8</div>
                       <div class="pd-name">Matchstick Ventures</div>
                       <div class="pd-title">Track Sponsor · AI</div>
                       <div class="pd-co">Minneapolis, MN · Seed &amp; Pre-Seed</div>
@@ -975,7 +986,7 @@
                 <div class="status-bar dark"><span>11:17</span><div class="status-icons">●●●● 5G ▮</div></div>
                 <div class="app-body">
                   <div style="padding: 14px 16px 10px; background:white; border-bottom:1px solid #f1f2f8;">
-                    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; color:var(--ink);">Connect</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:18px; color:var(--ink);">Connect</div>
                     <div style="font-size:11px; color:var(--muted); margin-top:2px;">328 attendees opted in to the public directory</div>
                   </div>
                   <div style="padding: 10px 14px; background:#fff7d6; border-bottom:1px solid rgba(245,200,66,0.4); display:flex; align-items:center; gap:8px;">
@@ -1107,8 +1118,6 @@
                   <div class="banner-lockup">
                     <div class="banner-title" style="font-size:18px;">TWIN CITIES<span class="accent">STARTUP WEEK</span></div>
                   </div>
-                  <div class="banner-beta"><span class="beta-mark">β</span> Produced by BETA.MN</div>
-                  <div class="powered">Powered by <span class="attn">Attentio</span></div>
                 </div>
                 <div class="app-body">
                   <div class="ticket-screen">
@@ -1323,27 +1332,27 @@
                   <div style="display:grid; grid-template-columns: 56px 1fr 56px; gap:10px; align-items:center; font-size:12px;">
                     <div style="font-weight:700; color:var(--ink);">MON 14</div>
                     <div style="height:10px; background:#eef0f7; border-radius:99px; overflow:hidden;"><div style="width:48%; height:100%; background:linear-gradient(90deg, var(--midnight), var(--gold));"></div></div>
-                    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; text-align:right; color:var(--ink);">14.2K</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-weight:700; text-align:right; color:var(--ink);">14.2K</div>
                   </div>
                   <div style="display:grid; grid-template-columns: 56px 1fr 56px; gap:10px; align-items:center; font-size:12px;">
                     <div style="font-weight:700; color:var(--ink);">TUE 15</div>
                     <div style="height:10px; background:#eef0f7; border-radius:99px; overflow:hidden;"><div style="width:92%; height:100%; background:linear-gradient(90deg, var(--midnight), var(--gold));"></div></div>
-                    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; text-align:right; color:var(--ink);">38.4K</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-weight:700; text-align:right; color:var(--ink);">38.4K</div>
                   </div>
                   <div style="display:grid; grid-template-columns: 56px 1fr 56px; gap:10px; align-items:center; font-size:12px;">
                     <div style="font-weight:700; color:var(--ink);">WED 16</div>
                     <div style="height:10px; background:#eef0f7; border-radius:99px; overflow:hidden;"><div style="width:78%; height:100%; background:linear-gradient(90deg, var(--midnight), var(--gold));"></div></div>
-                    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; text-align:right; color:var(--ink);">31.9K</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-weight:700; text-align:right; color:var(--ink);">31.9K</div>
                   </div>
                   <div style="display:grid; grid-template-columns: 56px 1fr 56px; gap:10px; align-items:center; font-size:12px;">
                     <div style="font-weight:700; color:var(--ink);">THU 17</div>
                     <div style="height:10px; background:#eef0f7; border-radius:99px; overflow:hidden;"><div style="width:84%; height:100%; background:linear-gradient(90deg, var(--midnight), var(--gold));"></div></div>
-                    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; text-align:right; color:var(--ink);">35.1K</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-weight:700; text-align:right; color:var(--ink);">35.1K</div>
                   </div>
                   <div style="display:grid; grid-template-columns: 56px 1fr 56px; gap:10px; align-items:center; font-size:12px;">
                     <div style="font-weight:700; color:var(--ink);">FRI 18</div>
                     <div style="height:10px; background:#eef0f7; border-radius:99px; overflow:hidden;"><div style="width:64%; height:100%; background:linear-gradient(90deg, var(--midnight), var(--gold));"></div></div>
-                    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; text-align:right; color:var(--ink);">27.7K</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-weight:700; text-align:right; color:var(--ink);">27.7K</div>
                   </div>
                 </div>
               </div>
@@ -1352,22 +1361,22 @@
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:10px;">
                   <div style="background:#fafbfd; border:1px solid var(--line); border-radius:10px; padding:10px;">
                     <div style="font-size:9px; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">Founders</div>
-                    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; color:var(--midnight); margin-top:2px;">487</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:20px; color:var(--midnight); margin-top:2px;">487</div>
                     <div style="font-size:11px; color:var(--muted); margin-top:2px;">51% of attendees</div>
                   </div>
                   <div style="background:#fafbfd; border:1px solid var(--line); border-radius:10px; padding:10px;">
                     <div style="font-size:9px; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">Investors</div>
-                    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; color:var(--midnight); margin-top:2px;">142</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:20px; color:var(--midnight); margin-top:2px;">142</div>
                     <div style="font-size:11px; color:var(--muted); margin-top:2px;">15%. VC, angel, family office</div>
                   </div>
                   <div style="background:#fafbfd; border:1px solid var(--line); border-radius:10px; padding:10px;">
                     <div style="font-size:9px; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">Operators</div>
-                    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; color:var(--midnight); margin-top:2px;">218</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:20px; color:var(--midnight); margin-top:2px;">218</div>
                     <div style="font-size:11px; color:var(--muted); margin-top:2px;">23%, eng, product, GTM</div>
                   </div>
                   <div style="background:#fafbfd; border:1px solid var(--line); border-radius:10px; padding:10px;">
                     <div style="font-size:9px; color:var(--muted); letter-spacing:0.12em; text-transform:uppercase; font-weight:700;">Students &amp; Other</div>
-                    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; color:var(--midnight); margin-top:2px;">109</div>
+                    <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:20px; color:var(--midnight); margin-top:2px;">109</div>
                     <div style="font-size:11px; color:var(--muted); margin-top:2px;">11% · University of Minnesota, University of St. Thomas, Macalester College</div>
                   </div>
                 </div>
@@ -1429,15 +1438,15 @@
         </div>
       </div>
 
-      <div style="background:linear-gradient(140deg, var(--midnight) 0%, #14173f 55%, var(--indigo) 100%); border-radius:24px; padding:44px 40px; color:white; position:relative; overflow:hidden; box-shadow:0 30px 70px rgba(10,16,40,0.35);">
-        <div style="position:absolute; inset:0; background:radial-gradient(600px 240px at 80% -10%, rgba(245,200,66,0.16), transparent 70%); pointer-events:none;"></div>
+      <div style="background:linear-gradient(140deg, var(--midnight) 0%, #0b3d4d 55%, var(--indigo) 100%); border-radius:24px; padding:44px 40px; color:white; position:relative; overflow:hidden; box-shadow:0 30px 70px rgba(12,73,90,0.35);">
+        <div style="position:absolute; inset:0; background:radial-gradient(600px 240px at 80% -10%, rgba(251,189,25,0.16), transparent 70%); pointer-events:none;"></div>
 
         <div style="position:relative;">
-          <!-- Partnership lockup -->
-          <div style="display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;">
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:26px; letter-spacing:-0.01em;"><span style="color:var(--gold);">β</span> BETA.MN</div>
-            <div style="font-size:20px; color:rgba(255,255,255,0.45);">×</div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:26px;">Attentio</div>
+          <!-- Partnership lockup: simple BETA.MN + Attentio wordmark -->
+          <div style="display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; font-family:'Montserrat',sans-serif; font-weight:800; font-size:30px; letter-spacing:-0.01em; color:#fff;">
+            <span>BETA.MN</span>
+            <span style="color:var(--gold); font-weight:700;">+</span>
+            <span>Attentio</span>
           </div>
 
           <p style="text-align:center; max-width:640px; margin:18px auto 0; font-size:15px; line-height:1.65; color:rgba(255,255,255,0.86);">
@@ -1447,28 +1456,25 @@
           <!-- Three data-ownership points -->
           <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:34px;">
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:18px;">
-              <div style="font-size:20px;">🛠️</div>
-              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--gold); margin-top:10px;">Self-sufficient</div>
-              <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; margin-top:6px;">BETA.MN owns the platform.</div>
+              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--gold);">Self-sufficient</div>
+              <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; margin-top:6px;">BETA.MN owns the platform.</div>
               <div style="font-size:12.5px; line-height:1.5; color:rgba(255,255,255,0.78); margin-top:6px;">Built to be run by the team, year after year, with no dependency, no rebuild, no vendor lock-in.</div>
             </div>
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:18px;">
-              <div style="font-size:20px;">🔒</div>
-              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--gold); margin-top:10px;">Data stays home</div>
-              <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; margin-top:6px;">Never sold, never brokered.</div>
+              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--gold);">Data stays home</div>
+              <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; margin-top:6px;">Never sold, never brokered.</div>
               <div style="font-size:12.5px; line-height:1.5; color:rgba(255,255,255,0.78); margin-top:6px;">Attendee data lives with BETA.MN, never passed to third parties or data brokers.</div>
             </div>
             <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:18px;">
-              <div style="font-size:20px;">🤝</div>
-              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--gold); margin-top:10px;">Trust, not trade</div>
-              <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; margin-top:6px;">Maya opts into BETA.MN, no one else.</div>
+              <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; color:var(--gold);">Trust, not trade</div>
+              <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; margin-top:6px;">Maya opts into BETA.MN, no one else.</div>
               <div style="font-size:12.5px; line-height:1.5; color:rgba(255,255,255,0.78); margin-top:6px;">Attendees like Maya are comfortable sharing because their data goes to the community they trust, full stop.</div>
             </div>
           </div>
 
           <!-- Closing line -->
           <div style="text-align:center; margin-top:38px;">
-            <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:24px; color:var(--gold); letter-spacing:-0.01em;">This is just the beginning.</div>
+            <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:24px; color:var(--gold); letter-spacing:-0.01em;">This is just the beginning.</div>
           </div>
         </div>
       </div>
