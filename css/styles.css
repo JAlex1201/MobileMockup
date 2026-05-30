@@ -179,10 +179,13 @@
     padding: 30px 0;
     border-top: 1px solid var(--line);
     scroll-snap-align: start;
-    /* Off-screen steps skip render (perf); intrinsic size ~= one viewport so snap
-       points + scroll-progress offsets stay close before a step first paints. */
-    content-visibility: auto;
-    contain-intrinsic-size: auto 900px;
+    /* NOTE: content-visibility:auto was intentionally removed from .scene. With
+       full-frame (100vh) scenes it deferred each step's first paint, which caused
+       a layout jump on render (Scene 7 alone grows ~767px past the 900px estimate)
+       and pop-in on fast scroll. Pre-rendering the ~9 scenes keeps the live
+       walkthrough scroll buttery — pure compositing, no reflow, no pop-in. The
+       perf win (skipping off-screen paint) is kept on the big bottom .arch-section,
+       which has nothing after it to shift. */
   }
   .scene:first-child { border-top: 0; }
   .scene-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; flex-wrap: wrap; }
@@ -261,6 +264,9 @@
   /* Multi-phone showcase scenes line up 2–3 phones, so scale them down further to
      keep the whole step (copy + phones) inside one frame. */
   .scene .phone-wrap.dual { zoom: 0.54; }
+  /* The Sponsor Dashboard step is a desktop view (far taller than the phone
+     screens), so scale that whole mock down to keep the step inside one frame. */
+  .scene .dashboard { zoom: 0.46; }
   .phone-wrap.dual { gap: 28px; }
 
   /* ============================ PHONE ============================ */
